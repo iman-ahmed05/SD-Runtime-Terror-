@@ -23,6 +23,7 @@ public class AgeService {
 	             age.setFirstYear(rs.getInt("START_AGE"));
 	             age.setDropOut(rs.getInt("END_AGE"));
 	             age.setStudentId(rs.getString("STUDENT_NUM"));
+	             age.setYearsInSys(rs.getInt("YEARS_IN_SYSTEM"));
 	          }
 	      }catch (SQLException e) {
 	          // handle the exception
