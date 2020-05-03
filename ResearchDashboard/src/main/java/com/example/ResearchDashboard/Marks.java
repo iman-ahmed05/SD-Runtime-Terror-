@@ -42,7 +42,7 @@ public class Marks {
 	}
 	
 	public void setAgg_yos3(String yos3) {
-		AGG_YOS1 = yos3;
+		AGG_YOS3 = yos3;
 	}
 	
 	public String getProg_yos1() {
