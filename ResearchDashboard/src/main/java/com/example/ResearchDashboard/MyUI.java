@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.ResearchDashboard;
 
 import java.awt.GradientPaint;
 import java.awt.Paint;

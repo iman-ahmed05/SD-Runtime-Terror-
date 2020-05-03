@@ -44,6 +44,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+	<dependency>
+		<groupId>org.vaadin.addon</groupId>
+		<artifactId>jfreechartwrapper</artifactId>
+		<version>4.0.0</version>
+	</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

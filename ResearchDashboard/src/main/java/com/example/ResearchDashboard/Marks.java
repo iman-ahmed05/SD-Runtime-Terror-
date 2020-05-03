@@ -1,45 +1,9 @@
 package com.example.ResearchDashboard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Marks {
 	private String STUDENT_NUM, AGG_YOS1, AGG_YOS2, AGG_YOS3, PROG_O_YOS1, PROG_O_YOS2, PROG_O_YOS3, FINAL_OUT;
 	private String YOS1_OUT, YOS2_OUT, YOS3_OUT;
 	private int AGG_ID;
-	
-	public Marks () {
-		
-		 String sqlSelectAllPersons = "SELECT * FROM MARKS";
-	      String connectionUrl = "jdbc:mysql://localhost:3306/SD?serverTimezone=UTC";
-	       
-	      try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "mysqlpass"); 
-	              PreparedStatement ps = conn.prepareStatement(sqlSelectAllPersons); 
-	    		  ResultSet rs = ps.executeQuery()) {
-	          
-	          while (rs.next()) {
-	        	  STUDENT_NUM = rs.getString("STUDENT_NUM");
-	        	  AGG_YOS1 = rs.getString("AGG_YOS1");
-	        	  AGG_YOS2 = rs.getString("AGG_YOS2");
-	        	  AGG_YOS3 = rs.getString("AGG_YOS3");
-	        	  PROG_O_YOS1 = rs.getString("PROG_O_YOS1");
-	        	  PROG_O_YOS2 = rs.getString("PROG_O_YOS2");
-	        	  PROG_O_YOS3 = rs.getString("PROG_O_YOS3");
-	        	  FINAL_OUT = rs.getString("YOS3_OUT");
-	        	  YOS1_OUT = rs.getString("YOS1_OUT"); 
-	        	  YOS2_OUT = rs.getString("YOS2_OUT"); 
-	        	  YOS3_OUT = rs.getString("YOS3_OUT"); 
-	        	  
-	        	  AGG_ID= rs.getInt("AGG_ID"); 
-	          }
-	      }catch (SQLException e) {
-	          // handle the exception
-	          System.out.println(e);
-		}
-	}
 	
 	public int getId() {
 		return AGG_ID;

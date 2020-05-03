@@ -1,35 +1,8 @@
 package com.example.ResearchDashboard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Age {
 	private int AgeID, FirstYear, DropOutOrGrad, Years_In_Sys;
 	private String StudentID;
-	
-	public Age() {
-		
-		  String sqlSelectAllPersons = "SELECT * FROM AGE";
-	      String connectionUrl = "jdbc:mysql://localhost:3306/SD?serverTimezone=UTC";
-	       
-	      try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "mysqlpass"); 
-	              PreparedStatement ps = conn.prepareStatement(sqlSelectAllPersons); 
-	    		  ResultSet rs = ps.executeQuery()) {
-	          
-	          while (rs.next()) {
-	             AgeID = rs.getInt("AGE_ID");
-	             FirstYear = rs.getInt("START_AGE");
-	             DropOutOrGrad = rs.getInt("END_AGE");
-	             StudentID = rs.getString("STUDENT_NUM");
-	          }
-	      }catch (SQLException e) {
-	          // handle the exception
-	          System.out.println(e);
-		}
-	}
 	
 	public int getId() {
 		return AgeID;
