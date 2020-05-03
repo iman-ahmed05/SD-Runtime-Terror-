@@ -1,10 +1,35 @@
 package com.example.ResearchDashboard;
 
-public class Course {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	private String CourseCode;
+public class Course {
 	
-	private String CourseName;
+private String CourseCode;
+private String CourseName;
+
+	public Course () {
+		
+		  String sqlSelectAllPersons = "SELECT * FROM courses";
+	      String connectionUrl = "jdbc:mysql://localhost:3306/SD?serverTimezone=UTC";
+	       
+	      try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "mysqlpass"); 
+	              PreparedStatement ps = conn.prepareStatement(sqlSelectAllPersons); 
+	    		  ResultSet rs = ps.executeQuery()) {
+	          
+	          while (rs.next()) {
+	             CourseCode = rs.getString("COURSE_CODE");
+	             CourseName = rs.getString("COURSE_NAME");
+	          }
+	      }catch (SQLException e) {
+	          // handle the exception
+	          System.out.println(e);
+		}
+	}
+
 	
 	public void setCourseCode(String courseCode) {
 		this.CourseCode = courseCode;
@@ -21,5 +46,6 @@ public class Course {
 	public String getCourseName() {
 		return CourseName;
 	}
-	
 }
+	
+
