@@ -12,12 +12,15 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.Regression;
 import org.jfree.data.xy.DefaultTableXYDataset;
@@ -70,132 +73,70 @@ public class MyUI extends UI {
         setContent(layout);
     }
     
-    public static JFreeChartWrapper createBasicDemo() {
-    	JFreeChart createchart = createchart(createDataset());
-    	return new JFreeChartWrapper(createchart(null));
-    }
-    
-    private static CategoryDataset createDataset() {
-    	// row keys...
-    			String series1 = "First";
-    			String series2 = "Second";
-    			String series3 = "Third";
-
-    			// column keys...
-    			String category1 = "Category 1";
-    			String category2 = "Category 2";
-    			String category3 = "Category 3";
-    			String category4 = "Category 4";
-    			String category5 = "Category 5";
-
-    			// create the dataset...
-    			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-    			dataset.addValue(1.0, series1, category1);
-    			dataset.addValue(4.0, series1, category2);
-    			dataset.addValue(3.0, series1, category3);
-    			dataset.addValue(5.0, series1, category4);
-    			dataset.addValue(5.0, series1, category5);
-
-    			dataset.addValue(5.0, series2, category1);
-    			dataset.addValue(7.0, series2, category2);
-    			dataset.addValue(6.0, series2, category3);
-    			dataset.addValue(8.0, series2, category4);
-    			dataset.addValue(4.0, series2, category5);
-
-    			dataset.addValue(4.0, series3, category1);
-    			dataset.addValue(3.0, series3, category2);
-    			dataset.addValue(2.0, series3, category3);
-    			dataset.addValue(3.0, series3, category4);
-    			dataset.addValue(6.0, series3, category5);
-
-    			return dataset;
-    	
-    }
-    
-    private static JFreeChart createchart(CategoryDataset dataset) {
-    	JFreeChart chart = ChartFactory.createBarChart("Bar Chart Demo 1", // chart
-				// title
-				"Category", // domain axis label
-				"Value", // range axis label
-				dataset, // data
-				PlotOrientation.VERTICAL, // orientation
-				true, // include legend
-				true, // tooltips?
-				false // URLs?
-				);
-    	
-    	chart.setBackgroundPaint((Paint) Color.WHITE);
-    	CategoryPlot plot = (CategoryPlot) chart.getPlot();
-		plot.setBackgroundPaint((Paint) Color.YELLOW);
-		plot.setDomainGridlinePaint((Paint) Color.WHITE);
-		plot.setDomainGridlinesVisible(true);
-		plot.setRangeGridlinePaint((Paint) Color.WHITE);
-		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		/*BarRenderer renderer = (BarRenderer) plot.getRenderer();
-		GradientPaint gp0 = new GradientPaint(0.0f, 0.0f,new Color.blue, 0.0f,
-				0.0f, new Color(0, 0, 64));
-		GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.green, 0.0f,
-				0.0f, new Color(0, 64, 0));
-		GradientPaint gp2 = new GradientPaint(0.0f, 0.0f, Color.red, 0.0f,
-				0.0f, new Color(64, 0, 0));
-		renderer.setSeriesPaint(0, gp0);
-		renderer.setSeriesPaint(1, gp1);
-		renderer.setSeriesPaint(2, gp2);
-		*/
-
-		CategoryAxis domainAxis = plot.getDomainAxis();
-		domainAxis.setCategoryLabelPositions(CategoryLabelPositions
-				.createUpRotationLabelPositions(Math.PI / 6.0));
-		// OPTIONAL CUSTOMISATION COMPLETED.
-
-		return chart;
-    }
     
     public static Component getTestAndDemos() {
     	VerticalLayout vl = new VerticalLayout();
-		//vl.setSpacing(true);
+		vl.setSpacing(true);
 
 		//vl.addComponent(createBasicDemo());
+		vl.addComponent(PieChart());
 		
-		vl.addComponent(regressionChart());
-		
+		vl.addComponent(BarChart());
 		return vl;
     }
     
-    private static Component regressionChart() {
+    
+   private static Component PieChart() {
+	   DefaultPieDataset dataset = new DefaultPieDataset();
+	   dataset.setValue("Apache", 52);
+       dataset.setValue("Nginx", 31);
+       dataset.setValue("IIS", 12);
+       dataset.setValue("LiteSpeed", 2);
+       dataset.setValue("Google server", 1);
+       dataset.setValue("Others", 2);
+       
+       JFreeChart pieChart = ChartFactory.createPieChart(
+               "Web servers market share",
+               dataset,
+               false, true, false);
+       
+       PiePlot p = (PiePlot) pieChart.getPlot();
+       
+       
+       
+       JFreeChart c = new JFreeChart(p);
 
-		DefaultTableXYDataset ds = new DefaultTableXYDataset();
+		return new JFreeChartWrapper(c);
 
-		XYSeries series;
+   }
+    
+    private static Component BarChart() {
 
-		series = new XYSeries("BAR", false, false);
-		series.add(1, 1);
-		series.add(2, 4);
-		series.add(3, 6);
-		series.add(4, 9);
-		series.add(5, 9);
-		series.add(6, 11);
-		ds.addSeries(series);
+    	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(46, "Gold medals", "USA");
+        dataset.setValue(38, "Gold medals", "China");
+        dataset.setValue(29, "Gold medals", "UK");
+        dataset.setValue(22, "Gold medals", "Russia");
+        dataset.setValue(13, "Gold medals", "South Korea");
+        dataset.setValue(11, "Gold medals", "Germany");
+        
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Olympic gold medals in London",
+                "Country",
+                "Gold medals",
+                dataset,
+                PlotOrientation.VERTICAL,
+                false, true, false);
 
-		JFreeChart scatterPlot = ChartFactory.createScatterPlot("Regression",
-				"X", "Y", ds, PlotOrientation.HORIZONTAL, true, false, false);
+		
 
-		XYPlot plot = (XYPlot) scatterPlot.getPlot();
+		CategoryPlot plot = (CategoryPlot) barChart.getPlot();
 
-		double[] regression = Regression.getOLSRegression(ds, 0);
+		//plot.setRangeGridlinePaint((Paint) Color.BLACK);
 
 		// regression line points
 
-		double v1 = regression[0] + regression[1] * 1;
-		double v2 = regression[0] + regression[1] * 6;
-
-		DefaultXYDataset ds2 = new DefaultXYDataset();
-		ds2.addSeries("regline", new double[][] { new double[] { 1, 6 },
-				new double[] { v1, v2 } });
-		plot.setDataset(1, ds2);
-		plot.setRenderer(1, new XYLineAndShapeRenderer(true, false));
+		
 
 		JFreeChart c = new JFreeChart(plot);
 
