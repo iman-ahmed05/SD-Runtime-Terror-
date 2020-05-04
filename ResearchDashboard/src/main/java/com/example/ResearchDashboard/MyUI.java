@@ -34,6 +34,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.colorpicker.Color;
 import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -41,10 +42,11 @@ import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
-
+import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -64,84 +66,100 @@ import com.vaadin.ui.VerticalLayout;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
-
+		private VerticalLayout main = new VerticalLayout();
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
-        layout.addComponent(getTestAndDemos());
+    	Label heading = new Label("Select Your Query to Filter");
+    	HorizontalLayout title = new HorizontalLayout();
+    	title.addComponent(heading);
+    	HorizontalLayout filter = new HorizontalLayout();
+    	heading.setStyleName(ValoTheme.LABEL_H1);
+    	Button pie = new Button("Student Status");
+        Button bar = new Button("Enrollment Growth");
+        filter.addComponents(pie, bar);
+        filter.setSpacing(true);
+        
+        main.addComponents(title, filter);
+        main.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
+        main.setComponentAlignment(filter, Alignment.MIDDLE_CENTER);
+        
+        pie.addClickListener(click -> {
+        	addWindow(pieFilter());	
+        });
+        
+        bar.addClickListener(click -> {
+    		addWindow(barFilter());
+        });
 
-        setContent(layout);
+        main.setSpacing(true);
+        setContent(main);
     }
-    
-    
-    public static Component getTestAndDemos() {
-    	VerticalLayout vl = new VerticalLayout();
-		vl.setSpacing(true);
-
-		//vl.addComponent(createBasicDemo());
-		vl.addComponent(PieChart());
-		
-		vl.addComponent(BarChart());
-		return vl;
-    }
-    
     
    private static Component PieChart() {
 	   DefaultPieDataset dataset = new DefaultPieDataset();
-	   dataset.setValue("Apache", 52);
-       dataset.setValue("Nginx", 31);
-       dataset.setValue("IIS", 12);
-       dataset.setValue("LiteSpeed", 2);
-       dataset.setValue("Google server", 1);
-       dataset.setValue("Others", 2);
+	   dataset.setValue("Excluded", 41.5);
+       dataset.setValue("Not Categorised", 11.7);
+       dataset.setValue("Proceed", 15.7);
+       dataset.setValue("Qualify", 31.1);
        
        JFreeChart pieChart = ChartFactory.createPieChart(
-               "Web servers market share",
+               "Student Outcome Status",
                dataset,
                false, true, false);
        
        PiePlot p = (PiePlot) pieChart.getPlot();
-       
-       
-       
        JFreeChart c = new JFreeChart(p);
-
-		return new JFreeChartWrapper(c);
+	return new JFreeChartWrapper(c);
 
    }
     
-    private static Component BarChart() {
-
+    private static Component BarGraph() {
+    	
     	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(46, "Gold medals", "USA");
-        dataset.setValue(38, "Gold medals", "China");
-        dataset.setValue(29, "Gold medals", "UK");
-        dataset.setValue(22, "Gold medals", "Russia");
-        dataset.setValue(13, "Gold medals", "South Korea");
-        dataset.setValue(11, "Gold medals", "Germany");
+        dataset.setValue(1953, "Students Enrolled", "2008");
+        dataset.setValue(1044, "Students Enrolled", "2009");
+        dataset.setValue(1089, "Students Enrolled", "2010");
+        dataset.setValue(1112, "Students Enrolled", "2011");
+        dataset.setValue(1067, "Students Enrolled", "2012");
+        dataset.setValue(1193, "Students Enrolled", "2013");
+        dataset.setValue(1152, "Students Enrolled", "2014");
+        dataset.setValue(1307, "Students Enrolled", "2015");
+        dataset.setValue(1480, "Students Enrolled", "2016");
+        dataset.setValue(1388, "Students Enrolled", "2017");
+        dataset.setValue(1541, "Students Enrolled", "2018");
         
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Olympic gold medals in London",
-                "Country",
-                "Gold medals",
+                "Student Enrollemnt by Year",
+                "Year",
+                "Number Of stduents",
                 dataset,
                 PlotOrientation.VERTICAL,
                 false, true, false);
 
-		
-
 		CategoryPlot plot = (CategoryPlot) barChart.getPlot();
-
-		//plot.setRangeGridlinePaint((Paint) Color.BLACK);
-
-		// regression line points
-
-		
-
 		JFreeChart c = new JFreeChart(plot);
-
 		return new JFreeChartWrapper(c);
 	}
+    
+    public Window pieFilter() {
+    	Window pie = new Window("Student Outcome Status");
+    	VerticalLayout enrolment = new VerticalLayout();
+    	pie.setContent(enrolment);
+    	enrolment.addComponent(PieChart());
+    	pie.center();
+    	enrolment.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+    	return pie;
+    }
+    
+    public Window barFilter() {
+    	Window bar = new Window("Student Enrollment Growth Per Year");
+    	VerticalLayout studentstatus = new VerticalLayout();
+    	bar.setContent(studentstatus);
+    	studentstatus.addComponent(BarGraph());
+    	bar.center();
+    	studentstatus.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+    	return bar;
+    }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
