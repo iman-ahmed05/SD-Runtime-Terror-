@@ -74,8 +74,8 @@ public class MyUI extends UI {
     	title.addComponent(heading);
     	HorizontalLayout filter = new HorizontalLayout();
     	heading.setStyleName(ValoTheme.LABEL_H1);
-    	Button pie = new Button("Enrolment by Year");
-        Button bar = new Button("Student Status");
+    	Button pie = new Button("Student Status");
+        Button bar = new Button("Enrollment Growth");
         filter.addComponents(pie, bar);
         filter.setSpacing(true);
         
@@ -97,15 +97,13 @@ public class MyUI extends UI {
     
    private static Component PieChart() {
 	   DefaultPieDataset dataset = new DefaultPieDataset();
-	   dataset.setValue("2008", 9);
-       dataset.setValue("2009", 9);
-       dataset.setValue("2010", 10);
-       dataset.setValue("2011", 19);
-       dataset.setValue("2012", 26);
-       dataset.setValue("2013", 27);
+	   dataset.setValue("Excluded", 41.5);
+       dataset.setValue("Not Categorised", 11.7);
+       dataset.setValue("Proceed", 15.7);
+       dataset.setValue("Qualify", 31.1);
        
        JFreeChart pieChart = ChartFactory.createPieChart(
-               "Students Enrolment per year",
+               "Student Outcome Status",
                dataset,
                false, true, false);
        
@@ -118,17 +116,22 @@ public class MyUI extends UI {
     private static Component BarGraph() {
     	
     	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(46, "Gold medals", "USA");
-        dataset.setValue(38, "Gold medals", "China");
-        dataset.setValue(29, "Gold medals", "UK");
-        dataset.setValue(22, "Gold medals", "Russia");
-        dataset.setValue(13, "Gold medals", "South Korea");
-        dataset.setValue(11, "Gold medals", "Germany");
+        dataset.setValue(1953, "Students Enrolled", "2008");
+        dataset.setValue(1044, "Students Enrolled", "2009");
+        dataset.setValue(1089, "Students Enrolled", "2010");
+        dataset.setValue(1112, "Students Enrolled", "2011");
+        dataset.setValue(1067, "Students Enrolled", "2012");
+        dataset.setValue(1193, "Students Enrolled", "2013");
+        dataset.setValue(1152, "Students Enrolled", "2014");
+        dataset.setValue(1307, "Students Enrolled", "2015");
+        dataset.setValue(1480, "Students Enrolled", "2016");
+        dataset.setValue(1388, "Students Enrolled", "2017");
+        dataset.setValue(1541, "Students Enrolled", "2018");
         
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Olympic gold medals in London",
-                "Country",
-                "Gold medals",
+                "Student Enrollemnt by Year",
+                "Year",
+                "Number Of stduents",
                 dataset,
                 PlotOrientation.VERTICAL,
                 false, true, false);
@@ -139,7 +142,7 @@ public class MyUI extends UI {
 	}
     
     public Window pieFilter() {
-    	Window pie = new Window("Enrolment per Year");
+    	Window pie = new Window("Student Outcome Status");
     	VerticalLayout enrolment = new VerticalLayout();
     	pie.setContent(enrolment);
     	enrolment.addComponent(PieChart());
@@ -149,7 +152,7 @@ public class MyUI extends UI {
     }
     
     public Window barFilter() {
-    	Window bar = new Window("Student Status per Year");
+    	Window bar = new Window("Student Enrollment Growth Per Year");
     	VerticalLayout studentstatus = new VerticalLayout();
     	bar.setContent(studentstatus);
     	studentstatus.addComponent(BarGraph());
