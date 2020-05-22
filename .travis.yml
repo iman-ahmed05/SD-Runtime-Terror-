@@ -1,5 +1,6 @@
-language: java
-jdk: openjdk8
-
-install: true
-script: mvn test -B
+language: csharp
+mono: none
+dotnet: 3.1.300
+script:
+ - dotnet restore
+...
