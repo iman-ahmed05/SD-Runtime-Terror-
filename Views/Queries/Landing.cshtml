@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Landing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Research Page</h5>
+<hr class="my-4" />
+<div>
+    <p>This will be the page a user lands on when they click the Queries tab</p>
+</div>
+<hr class="my-4" />
+<div>
+    <p>Users will be allowed to select items to filter on. Eg age, region, outcome, etc</p>
+    <p>A graph will be generated once a user submits the query</p>
+</div>
+<hr class="my-4" />
+<div class="container-fluid">
+    <h4>Select your filter points</h4><br />
+    <div class="row">
+        <div class="col-sm-6">
+            <fieldset class="form-group">
+                <h5>Province</h5>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1">
+                        Johannesburg
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                        KZN
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+                        Western Cape
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option4">
+                        All
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+    </div><br />
+    <div class="row">
+        <button type="submit" class="btn btn-dark">Submit Query</button>
+    </div>
+</div>
+
+
