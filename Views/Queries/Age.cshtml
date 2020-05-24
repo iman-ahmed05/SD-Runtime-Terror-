@@ -7,71 +7,83 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
+        JSONMale = '@Html.Raw(Json.Serialize(ViewBag.Male))';
+        console.log(JSONMale);
+        var Male = [];
+        Male.push(['Age', 'Number']);
+        $.each(JSON.parse(JSONMale), function (index, val) {
+            var arrMale = [];
+            arrMale.push(val.end_Age);
+            arrMale.push(val.count);
+            Male.push(arrMale);
+        });
+        JSONFemale = '@Html.Raw(Json.Serialize(ViewBag.Female))';
+        console.log(JSONFemale);
+        var Female = [];
+        Female.push(['Age', 'Number']);
+        $.each(JSON.parse(JSONFemale), function (index, val) {
+            var arrFemale = [];
+            arrFemale.push(val.end_Age);
+            arrFemale.push(val.count);
+            Female.push(arrFemale);
+        });
+
+        google.charts.setOnLoadCallback(drawBar);
+
+        function drawBar() {
+            var data = google.visualization.arrayToDataTable([
+                ['Age', 'Excluded', { role: 'annotation' }],
+                ['16', 1, ''],
+                ['17', 5, ''],
+                ['18', 102, ''],
+                ['19', 408, ''],
+                ['20', 459, ''],
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'Number of students Excluded from Ages 16-20',
+                },
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('Bar'));
+            materialChart.draw(data, materialOptions);
+        }
 
         google.charts.setOnLoadCallback(drawMale);
-        google.charts.setOnLoadCallback(drawFemale);
-
         function drawMale() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
-                ['2008', 113, 33, 0, 31, ''],
-                ['2009', 198, 34,  0, 41, ''],
-                ['2010', 196, 30,  107, 45, ''],
-                ['2011', 238, 41,  113, 50, ''],
-                ['2012', 244, 50,  129, 33, ''],
-                ['2013', 268, 69,  155, 37, ''],
-                ['2014', 274, 86,  174, 26, ''],
-                ['2015', 230, 61,  203, 27, ''],
-                ['2016', 358, 70, 244, 48, ''],
-                ['2017', 293, 34,  276, 113, ''],
-                ['2018', 1024, 659,  599, 406, '']
-                
-            ]);
-
-            var materialOptions = {
-                chart: {
-                    title: 'Progression outcome for Males',
-                },
-                bars: 'vertical',
+            var data = google.visualization.arrayToDataTable(Male);
+            var options = {
+                title: ' Percentage of Male Students Excluded at Different Ages',
+                pieHole: 0.3,
             };
-            var materialChart = new google.charts.Bar(document.getElementById('barMale'));
-            materialChart.draw(data, materialOptions);
+            var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
+            chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawFemale);
         function drawFemale() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
-                ['2008', 90, 26, 0, 17, ''],
-                ['2009', 172, 40, 0, 43, ''],
-                ['2010', 149, 42, 141, 43, ''],
-                ['2011', 180, 59, 161, 44, ''],
-                ['2012', 173, 38, 176, 30, ''],
-                ['2013', 212, 35, 61, 223, ''],
-                ['2014', 196, 71, 56, 240, ''],
-                ['2015', 152, 45, 53, 240, ''],
-                ['2016', 206, 51, 71, 310, ''],
-                ['2017', 200, 28, 79, 313, ''],
-                ['2018', 770, 646, 660, 403, '']
-
-            ]);
-
-            var materialOptions = {
-                chart: {
-                    title: 'Progression outcome for Females',
-                },
-                bars: 'vertical',
+            var data = google.visualization.arrayToDataTable(Female);
+            var options = {
+                title: ' Percentage of Female Students Excluded at Different Ages',
+                pieHole: 0.3,
             };
-            var materialChart = new google.charts.Bar(document.getElementById('barFemale'));
-            materialChart.draw(data, materialOptions);
+            var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
+            chart.draw(data, options);
         }
 
-        
+
 
     </script>
 </head>
 <body>
-    <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
-    <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
-
+    <div id="Bar" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <br />
+    <table class="columns">
+        <tr>
+            <td><div id="piechartMale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartFemale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
 </body>
 </html> 
