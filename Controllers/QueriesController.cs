@@ -46,7 +46,43 @@ namespace BID_E.Controllers
 
         public IActionResult Age()
         {
+            string cs = "Filename =./SD.db";
+            SqliteConnection conn = new SqliteConnection(cs);
+            SqliteCommand cmd;
+            List<LookupAge> groupMale = new List<LookupAge>();
+            List<LookupAge> groupFemale = new List<LookupAge>();
+
+            string Male = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN 5 AND 20 GROUP BY END_AGE ORDER BY END_AGE";
+            string Female = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN 5 AND 20 GROUP BY END_AGE ORDER BY END_AGE";
+
+            conn.Open();
+            if ((conn.State & System.Data.ConnectionState.Open) > 0)
+            {
+                cmd = new SqliteCommand(Male, conn);
+                SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupAge obj = new LookupAge();
+                    obj.End_Age = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupMale.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Female, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupAge obj = new LookupAge();
+                    obj.End_Age = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupFemale.Add(obj);
+                }
+            }
+            conn.Close();
+            ViewBag.Male = groupMale;
+            ViewBag.Female = groupFemale;
             return View();
+
         }
 
         public IActionResult EasternCape()
@@ -474,6 +510,58 @@ namespace BID_E.Controllers
             ViewBag.NA = groupNA;
             return View();
 
+        }
+
+        public IActionResult Years()
+        {
+            string cs = "Filename =./SD.db";
+            SqliteConnection conn = new SqliteConnection(cs);
+            SqliteCommand cmd;
+            List<LookupYears> groupGen = new List<LookupYears>();
+            List<LookupYears> groupMale = new List<LookupYears>();
+            List<LookupYears> groupFemale = new List<LookupYears>();
+
+            string Gen_Years = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL GROUP BY YEARS_IN_SYSTEM";
+            string Male = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL WHERE GENDER='M'  GROUP BY YEARS_IN_SYSTEM";
+            string Female = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL WHERE GENDER='F' GROUP BY YEARS_IN_SYSTEM";
+
+            conn.Open();
+            if ((conn.State & System.Data.ConnectionState.Open) > 0)
+            {
+                cmd = new SqliteCommand(Gen_Years, conn);
+                SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupYears obj = new LookupYears();
+                    obj.Years_In_System = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupGen.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Male, conn);
+                while (reader.Read())
+                {
+                    LookupYears obj = new LookupYears();
+                    obj.Years_In_System = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupMale.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Female, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupYears obj = new LookupYears();
+                    obj.Years_In_System = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupFemale.Add(obj);
+                }
+            }
+            conn.Close();
+            ViewBag.Male = groupMale;
+            ViewBag.Female = groupFemale;
+            ViewBag.GenYears = groupGen;
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
