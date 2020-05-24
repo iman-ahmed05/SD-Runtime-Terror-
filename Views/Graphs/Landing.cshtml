@@ -9,6 +9,8 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
+       
+
 
 
         google.charts.setOnLoadCallback(drawMale);
@@ -33,7 +35,7 @@
 
             var materialOptions = {
                 chart: {
-                    title: 'Progression outcome for Males',
+                    title: '',
                 },
                 bars: 'vertical',
             };
@@ -88,7 +90,7 @@
 
             var materialOptions = {
                 chart: {
-                    title: 'Starting Age of Students',
+                    title: '',
                     subtitle: 'Categorised by Male & Female for Ages 5 to 25',
                 },
                 bars: 'vertical',
@@ -96,6 +98,285 @@
             var materialChart = new google.charts.Bar(document.getElementById('age'));
             materialChart.draw(data, materialOptions);
         }
+
+        google.charts.setOnLoadCallback(drawReg);
+        function drawReg() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Number of Registrations'],
+                ['2008', 1953],
+                ['2009', 1044],
+                ['2010', 1089],
+                ['2011', 1112],
+                ['2012', 1067],
+                ['2013', 1193],
+                ['2014', 1152],
+                ['2015', 1307],
+                ['2016', 1480],
+                ['2017', 1388],
+                ['2018', 1541]
+            ]);
+
+
+            var options = {
+                chart: {
+                    title: '',
+                    subtitle: '',
+                },
+                bars: 'vertical' // Required for Material Bar Charts.
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('barchart_reg'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+                JSONgroup2008 = '@Html.Raw(Json.Serialize(ViewBag.year08))';
+        console.log(JSONgroup2008);
+        var out08 = [];
+        out08.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2008), function (index, val) {
+            var arrgroup2008 = [];
+            arrgroup2008.push(val.outcome);
+            arrgroup2008.push(val.count);
+            out08.push(arrgroup2008);
+        });
+
+        JSONgroup2009 = '@Html.Raw(Json.Serialize(ViewBag.year09))';
+        console.log(JSONgroup2009);
+        var out09 = [];
+        out09.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2009), function (index, val) {
+            var arrgroup2009 = [];
+            arrgroup2009.push(val.outcome);
+            arrgroup2009.push(val.count);
+            out09.push(arrgroup2009);
+        });
+
+          JSONgroup2010 = '@Html.Raw(Json.Serialize(ViewBag.year10))';
+        console.log(JSONgroup2010);
+        var out10 = [];
+        out10.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2010), function (index, val) {
+            var arrgroup2010 = [];
+            arrgroup2010.push(val.outcome);
+            arrgroup2010.push(val.count);
+            out10.push(arrgroup2010);
+        });
+
+          JSONgroup2011 = '@Html.Raw(Json.Serialize(ViewBag.year11))';
+        console.log(JSONgroup2011);
+        var out11 = [];
+        out11.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2011), function (index, val) {
+            var arrgroup2011 = [];
+            arrgroup2011.push(val.outcome);
+            arrgroup2011.push(val.count);
+            out11.push(arrgroup2011);
+        });
+
+            JSONgroup2012 = '@Html.Raw(Json.Serialize(ViewBag.year12))';
+        console.log(JSONgroup2012);
+        var out12 = [];
+        out12.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2012), function (index, val) {
+            var arrgroup2012 = [];
+            arrgroup2012.push(val.outcome);
+            arrgroup2012.push(val.count);
+            out12.push(arrgroup2012);
+        });
+
+            JSONgroup2013 = '@Html.Raw(Json.Serialize(ViewBag.year13))';
+        console.log(JSONgroup2013);
+        var out13 = [];
+        out13.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2013), function (index, val) {
+            var arrgroup2013 = [];
+            arrgroup2013.push(val.outcome);
+            arrgroup2013.push(val.count);
+            out13.push(arrgroup2013);
+        });
+
+            JSONgroup2014 = '@Html.Raw(Json.Serialize(ViewBag.year14))';
+        console.log(JSONgroup2014);
+        var out14 = [];
+        out14.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2014), function (index, val) {
+            var arrgroup2014 = [];
+            arrgroup2014.push(val.outcome);
+            arrgroup2014.push(val.count);
+           out14.push(arrgroup2014);
+        });
+
+            JSONgroup2015 = '@Html.Raw(Json.Serialize(ViewBag.year15))';
+        console.log(JSONgroup2015);
+        var out15 = [];
+        out15.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2015), function (index, val) {
+            var arrgroup2015 = [];
+            arrgroup2015.push(val.outcome);
+            arrgroup2015.push(val.count);
+            out15.push(arrgroup2015);
+        });
+
+            JSONgroup2016 = '@Html.Raw(Json.Serialize(ViewBag.year16))';
+        console.log(JSONgroup2016);
+        var out16 = [];
+        out16.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2016), function (index, val) {
+            var arrgroup2016 = [];
+            arrgroup2016.push(val.outcome);
+            arrgroup2016.push(val.count);
+            out16.push(arrgroup2016);
+        });
+
+            JSONgroup2017 = '@Html.Raw(Json.Serialize(ViewBag.year17))';
+        console.log(JSONgroup2017);
+        var out17 = [];
+        out17.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2017), function (index, val) {
+            var arrgroup2017 = [];
+            arrgroup2017.push(val.outcome);
+            arrgroup2017.push(val.count);
+            out17.push(arrgroup2017);
+        });
+
+            JSONgroup2018 = '@Html.Raw(Json.Serialize(ViewBag.year18))';
+        console.log(JSONgroup2018);
+        var out18 = [];
+        out18.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONgroup2018), function (index, val) {
+            var arrgroup2018 = [];
+            arrgroup2018.push(val.outcome);
+            arrgroup2018.push(val.count);
+            out18.push(arrgroup2018);
+        });
+
+        console.log();
+
+        google.charts.setOnLoadCallback(drawgroup2008);
+        google.charts.setOnLoadCallback(drawgroup2009);
+        google.charts.setOnLoadCallback(drawgroup2010);
+        google.charts.setOnLoadCallback(drawgroup2011);
+        google.charts.setOnLoadCallback(drawgroup2012);
+        google.charts.setOnLoadCallback(drawgroup2013);
+        google.charts.setOnLoadCallback(drawgroup2014);
+        google.charts.setOnLoadCallback(drawgroup2015);
+        google.charts.setOnLoadCallback(drawgroup2016);
+        google.charts.setOnLoadCallback(drawgroup2017);
+        google.charts.setOnLoadCallback(drawgroup2018);
+
+        function drawgroup2008() {
+            var data = google.visualization.arrayToDataTable(out08);
+            var options = {
+                title: '2008',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2008'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2009() {
+            var data = google.visualization.arrayToDataTable(out09);
+            var options = {
+                title: '2009',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2009'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2010() {
+            var data = google.visualization.arrayToDataTable(out10);
+            var options = {
+                title: '2010',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2010'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2011() {
+            var data = google.visualization.arrayToDataTable(out11);
+            var options = {
+                title: '2011',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2011'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2012() {
+            var data = google.visualization.arrayToDataTable(out12);
+            var options = {
+                title: '2012',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2012'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2013() {
+            var data = google.visualization.arrayToDataTable(out13);
+            var options = {
+                title: '2013',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2013'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2014() {
+            var data = google.visualization.arrayToDataTable(out14);
+            var options = {
+                title: '2014',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2014'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2015() {
+            var data = google.visualization.arrayToDataTable(out15);
+            var options = {
+                title: '2015',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2015'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2016() {
+            var data = google.visualization.arrayToDataTable(out16);
+            var options = {
+                title: '2016',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2016'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2017() {
+            var data = google.visualization.arrayToDataTable(out17);
+            var options = {
+                title: '2017',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2017'));
+            chart.draw(data, options);
+        }
+
+        function drawgroup2018() {
+            var data = google.visualization.arrayToDataTable(out18);
+            var options = {
+                title: '2018',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart2018'));
+            chart.draw(data, options);
+        }
+
+
+
 
 
     </script>
@@ -111,10 +392,57 @@
         <p>Pre determined graphs will be displayed here. This means queries that we decide on will be displayed here every time the user logs in.</p>
         <p> Example: Number of registrations per year, Percentage of male and female exclusions. Basically Generic queries</p>
     </div><br />
+
+
+    <h6>Number of Registrations Per Year</h6>
+    <div id="barchart_reg" style="width: 900px; height: 500px;"></div>
+    <br />
+    <h6>Progression Outcomes Per Year</h6>
+    <table class="columns">
+        <tr>
+            <td><div id="piechart2008" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechart2009" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechart2010" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechart2011" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechart2012" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechart2013" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechart2014" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechart2015" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechart2016" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechart2017" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+    <div id="piechart2018" style="width: 1000px; height: 300px;border: 1px solid #ccc"></div>
+    <br />
+
+
+    <h6>Progression Outcomes for Males</h6>
     <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
     <br />
+    <h6>Progression Outcomes for Females</h6>
     <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
     <br />
+    <h6>Starting Age of Students</h6>
     <div id="age" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
 
 </body>
