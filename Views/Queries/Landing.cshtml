@@ -7,50 +7,50 @@
 <h5>Research Page</h5>
 <hr class="my-4" />
 <div>
-    <p>This will be the page a user lands on when they click the Queries tab</p>
+    <p>In order to view your graphs for research questions, please select your filter options</p>
 </div>
 <hr class="my-4" />
-<div>
-    <p>Users will be allowed to select items to filter on. Eg age, region, outcome, etc</p>
-    <p>A graph will be generated once a user submits the query</p>
-</div>
-<hr class="my-4" />
-<div class="container-fluid">
-    <h4>Select your filter points</h4><br />
-    <div class="row">
-        <div class="col-sm-6">
-            <fieldset class="form-group">
-                <h5>Province</h5>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1">
-                        Johannesburg
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                        KZN
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-                        Western Cape
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option4">
-                        All
-                    </label>
-                </div>
-            </fieldset>
+<h4>Select Your Filter</h4>
+<br />
+<h5>Province</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Province</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="EasternCape">Eastern Cape</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="FreeState">Free State</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Gauteng">Gauteng</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="KZN">KZN</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Limpopo">Limpopo</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Mpumalanga">Mpumalanga</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="NorthernCape">Northern Cape</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="NorthWest">North West</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="WesternCape">Western Cape</a>
         </div>
-    </div><br />
-    <div class="row">
-        <button type="submit" class="btn btn-dark">Submit Query</button>
-    </div>
-</div>
-
+</ul>
+<hr class="my-4" />
+<h5>Race</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Race</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Black</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Coloured</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Indian</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">White</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Other</a>
+        </div>
+</ul>
+<hr class="my-4" />
+<h5>Age</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Age</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">18-21</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">22-30</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">31-40</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">40+</a>
+        </div>
+</ul>
 

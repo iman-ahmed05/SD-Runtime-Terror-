@@ -1,0 +1,100 @@
+﻿
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['bar'] });
+
+
+        JSONMale = '@Html.Raw(Json.Serialize(ViewBag.Male))';
+        console.log(JSONMale);
+        var Male = [];
+        Male.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONMale), function (index, val) {
+            var arrMale = [];
+            arrMale.push(val.outcome);
+            arrMale.push(val.count);
+            Male.push(arrMale);
+        });
+        JSONFemale = '@Html.Raw(Json.Serialize(ViewBag.Female))';
+        console.log(JSONFemale);
+        var Female = [];
+        Female.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONFemale), function (index, val) {
+            var arrFemale = [];
+            arrFemale.push(val.outcome);
+            arrFemale.push(val.count);
+            Female.push(arrFemale);
+        });
+
+        console.log();
+
+        google.charts.setOnLoadCallback(drawBar);
+        function drawBar() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 6, 4, 0, 1, ''],
+                ['2009', 26, 5, 0, 2, ''],
+                ['2010', 24, 4, 9, 1, ''],
+                ['2011', 34, 10, 8, 0, ''],
+                ['2012', 49, 16, 13, 0, ''],
+                ['2013', 47, 12, 21, 1, ''],
+                ['2014', 40, 18, 28, 2, ''],
+                ['2015', 37, 9, 35, 0, ''],
+                ['2016', 74, 8, 40, 3, ''],
+                ['2017', 62, 7, 63, 14, ''],
+                ['2018', 244, 157, 110, 43, '']
+
+            ]);
+            var materialOptions = {
+                chart: {
+                    title: 'Province',
+                },
+
+                bars: 'vertical',
+
+            };
+
+            var materialChart = new google.charts.Bar(document.getElementById('barGraph'));
+            materialChart.draw(data, materialOptions);
+        }
+
+        google.charts.setOnLoadCallback(drawMale);
+        function drawMale() {
+            var data = google.visualization.arrayToDataTable(Male);
+            var options = {
+                title: 'Male',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
+            chart.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawFemale);
+        function drawFemale() {
+            var data = google.visualization.arrayToDataTable(Female);
+            var options = {
+                title: 'Female',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
+            chart.draw(data, options);
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div id="barGraph" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
+    <br />
+    <table class="columns">
+        <tr>
+            <td><div id="piechartMale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartFemale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+</body>
+</html> 
