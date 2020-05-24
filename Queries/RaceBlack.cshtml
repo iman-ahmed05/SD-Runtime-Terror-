@@ -1,0 +1,71 @@
+﻿
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['bar'] });
+
+        google.charts.setOnLoadCallback(drawBlack);
+        function drawBlack() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 140, 29, 0, 16, ''],
+                ['2009', 253, 33,  0, 22, ''],
+                ['2010', 233, 43,  111, 32, ''],
+                ['2011', 282, 48,  116, 40, ''],
+                ['2012', 311, 54,  136, 22, ''],
+                ['2013', 357, 76,  198, 26, ''],
+                ['2014', 354, 104,  234, 27, ''],
+                ['2015', 277, 72,  262, 18, ''],
+                ['2016', 446, 87, 336, 52, ''],
+                ['2017', 389, 49,  366, 149, ''],
+                ['2018', 1431, 867,  707, 555, '']
+
+            ]);
+            var materialOptions = {
+                chart: {
+                    title: 'Progression outcome for Black students',
+                },
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barBlack'));
+            materialChart.draw(data, materialOptions);
+        }
+
+
+        JSONRace = '@Html.Raw(Json.Serialize(ViewBag.Race))';
+        console.log(JSONRace);
+        var Race = [];
+        Race.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONRace), function (index, val) {
+            var arrRace = [];
+            arrRace.push(val.outcome);
+            arrRace.push(val.count);
+            Race.push(arrRace);
+        });
+
+        console.log();
+        google.charts.setOnLoadCallback(drawRace);
+
+        function drawRace() {
+            var data = google.visualization.arrayToDataTable(Race);
+            var options = {
+                title: 'Percentage of progression outcomes for Black students',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('pieRace'));
+            chart.draw(data, options);
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="barBlack" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <div id="pieRace" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+
+
+</body>
+</html> 

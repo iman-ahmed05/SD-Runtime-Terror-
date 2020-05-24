@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Landing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Research Page</h5>
+<hr class="my-4" />
+<div>
+    <p>In order to view your graphs for research questions, please select your filter options</p>
+</div>
+<hr class="my-4" />
+<h4>Select Your Filter</h4>
+<br />
+<h5>Province</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Province</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="EasternCape">Eastern Cape</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="FreeState">Free State</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Gauteng">Gauteng</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="KZN">KZN</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Limpopo">Limpopo</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Mpumalanga">Mpumalanga</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="NorthernCape">Northern Cape</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="NorthWest">North West</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="WesternCape">Western Cape</a>
+        </div>
+</ul>
+<hr class="my-4" />
+<h5>Race</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Race</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceAll">ALL</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceBlack">Black</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceColoured">Coloured</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceIndian">Indian</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceWhite">White</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceChinese">Chinese</a>
+        </div>
+</ul>
+<hr class="my-4" />
+<h5>Gender</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gender</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">ALL</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">Male</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">Female</a>
+        </div>
+</ul>
+<hr class="my-4" />
+<h5>Age</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Age</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">16-20</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">21-30</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">31-40</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age">40+</a>
+        </div>
+</ul>
+

@@ -1,0 +1,250 @@
+﻿
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['bar'] });
+
+
+        JSONRaceExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
+        console.log(JSONRaceExcluded);
+        var Excluded = [];
+        Excluded.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceExcluded), function (index, val) {
+            var arrExcluded = [];
+            arrExcluded.push(val.race);
+            arrExcluded.push(val.count);
+            Excluded.push(arrExcluded);
+        });
+
+        JSONRaceProceed = '@Html.Raw(Json.Serialize(ViewBag.Proceed))';
+        console.log(JSONRaceProceed);
+        var Proceed = [];
+        Proceed.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceProceed), function (index, val) {
+            var arrProceed = [];
+            arrProceed.push(val.race);
+            arrProceed.push(val.count);
+            Proceed.push(arrProceed);
+        });
+
+        JSONRaceQualified = '@Html.Raw(Json.Serialize(ViewBag.Qualified))';
+        console.log(JSONRaceQualified);
+        var Qualified = [];
+        Qualified.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceQualified), function (index, val) {
+            var arrQualified = [];
+            arrQualified.push(val.race);
+            arrQualified.push(val.count);
+            Qualified.push(arrQualified);
+        });
+
+        JSONRaceNA = '@Html.Raw(Json.Serialize(ViewBag.NA))';
+        console.log(JSONRaceNA);
+        var NA = [];
+        NA.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceNA), function (index, val) {
+            var arrNA = [];
+            arrNA.push(val.race);
+            arrNA.push(val.count);
+            NA.push(arrNA);
+        });
+
+        console.log();
+
+        google.charts.setOnLoadCallback(drawExcluded);
+        google.charts.setOnLoadCallback(drawProceed);
+        google.charts.setOnLoadCallback(drawQualified);
+        google.charts.setOnLoadCallback(drawNA);
+
+
+        function drawExcluded() {
+            var data = google.visualization.arrayToDataTable(Excluded);
+            var options = {
+                title: 'Excluded',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartExcluded'));
+            chart.draw(data, options);
+        }
+
+        function drawProceed() {
+            var data = google.visualization.arrayToDataTable(Proceed);
+            var options = {
+                title: 'Proceed',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartProceed'));
+            chart.draw(data, options);
+        }
+
+        function drawQualified() {
+            var data = google.visualization.arrayToDataTable(Proceed);
+            var options = {
+                title: 'Qualified',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartQualified'));
+            chart.draw(data, options);
+        }
+
+        function drawNA() {
+            var data = google.visualization.arrayToDataTable(NA);
+            var options = {
+                title: 'Not Categorised',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartNA'));
+            chart.draw(data, options);
+        }
+
+       /* function drawNA() {
+            var data = google.visualization.arrayToDataTable(NA);
+            var options = {
+                title: 'Not Categorised',
+                bars: 'horizontal' 
+            };
+            var chart = new google.charts.Bar(document.getElementById('piechartNA'));
+            chart.draw(data, options);
+
+        }*/
+
+        google.charts.setOnLoadCallback(drawBlack);
+        google.charts.setOnLoadCallback(drawIndian);
+        google.charts.setOnLoadCallback(drawColoured);
+
+        function drawBlack() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 140, 29, 0, 16, ''],
+                ['2009', 253, 33,  0, 22, ''],
+                ['2010', 233, 43,  111, 32, ''],
+                ['2011', 282, 48,  116, 40, ''],
+                ['2012', 311, 54,  136, 22, ''],
+                ['2013', 357, 76,  198, 26, ''],
+                ['2014', 354, 104,  234, 27, ''],
+                ['2015', 277, 72,  262, 18, ''],
+                ['2016', 446, 87, 336, 52, ''],
+                ['2017', 389, 49,  366, 149, ''],
+                ['2018', 1431, 867,  707, 555, '']
+                
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'Progression outcome for Black students',
+                },
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barBlack'));
+            materialChart.draw(data, materialOptions);
+        }
+
+        function drawIndian() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 28, 8, 0, 5, ''],
+                ['2009', 49, 8, 0, 11, ''],
+                ['2010', 51, 9, 28, 12, ''],
+                ['2011', 54, 18, 49, 11, ''],
+                ['2012', 38, 16, 47, 6, ''],
+                ['2013', 39, 9, 61, 4, ''],
+                ['2014', 46, 25, 56, 5, ''],
+                ['2015', 39, 16, 53, 7, ''],
+                ['2016', 40, 12, 71, 5, ''],
+                ['2017', 36, 7, 79, 11, ''],
+                ['2018', 167, 143, 199, 53, '']
+
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'Progression outcome for Indian students',
+                },
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barIndian'));
+            materialChart.draw(data, materialOptions);
+        }
+
+        function drawColoured() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 6, 2, 0, 1, ''],
+                ['2009', 6, 5, 0, 4, ''],
+                ['2010', 8, 5, 8, 2, ''],
+                ['2011', 20, 6, 8, 1, ''],
+                ['2012', 16, 4, 12, 2, ''],
+                ['2013', 12, 6, 11, 4, ''],
+                ['2014', 8, 4, 12, 0, ''],
+                ['2015', 8, 4, 12, 2, ''],
+                ['2016', 13, 4, 15, 2, ''],
+                ['2017', 17, 1, 22, 13, ''],
+                ['2018', 44, 34, 37, 23, '']
+
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'Progression outcome for Coloured students',
+                },
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barColoured'));
+            materialChart.draw(data, materialOptions);
+        }
+        google.charts.setOnLoadCallback(drawWhite);
+        function drawWhite() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorized', { role: 'annotation' }],
+                ['2008', 29, 2, 0, 0, ''],
+                ['2009', 61, 27, 0, 0, ''],
+                ['2010', 53, 15, 99, 0, ''],
+                ['2011', 61, 28, 98, 0, ''],
+                ['2012', 51, 13, 104, 0, ''],
+                ['2013', 70, 13, 107, 0, ''],
+                ['2014', 62, 21, 109, 0, ''],
+                ['2015', 56, 14, 113, 0, ''],
+                ['2016', 63, 18, 127, 0, ''],
+                ['2017', 45, 5, 119, 0, ''],
+                ['2018', 148, 221, 304, 0, '']
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'Progression outcome for White students',
+                },
+
+                bars: 'vertical',
+
+            };
+
+            var materialChart = new google.charts.Bar(document.getElementById('barWhite'));
+            materialChart.draw(data, materialOptions);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="barBlack" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <div id="barIndian" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <div id="barColoured" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <div id="barWhite" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechartExcluded" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartProceed" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table><br />
+    <table class="columns">
+        <tr>
+            <td><div id="piechartQualified" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartNA" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+</body>
+</html> 
