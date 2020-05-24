@@ -49,7 +49,14 @@ namespace BID_E.Models
 
     public class LookupAge
     {
+        public String End_Age { get; set; }
+        public int count { get; set; }
+    }
+
+    public class LookupYears
+    {
         public String Years_In_System { get; set; }
         public int count { get; set; }
     }
+
 }
