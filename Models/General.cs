@@ -46,4 +46,10 @@ namespace BID_E.Models
         public String race { get; set; }
         public int count { get; set; }
     }
+
+    public class LookupAge
+    {
+        public String Years_In_System { get; set; }
+        public int count { get; set; }
+    }
 }
