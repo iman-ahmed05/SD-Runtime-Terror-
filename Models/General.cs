@@ -31,5 +31,19 @@ namespace BID_E.Models
         public int Start_Year { get; set; }
         public int Reg_Start { get; set; }
         public int Reg_End { get; set; }
+        public int StudentCount { get; internal set; }
+    }
+
+    public class LookupOutcome
+    {
+        public String outcome { get; set; }
+        public int count { get; set; }
+
+    }
+
+    public class LookupRace
+    {
+        public String race { get; set; }
+        public int count { get; set; }
     }
 }

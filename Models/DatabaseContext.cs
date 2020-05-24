@@ -1,6 +1,6 @@
 ﻿using BID_E.Models;
 using Microsoft.EntityFrameworkCore;
-
+using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace SQLite.Models
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext()
+        public DatabaseContext( )
         {
-
+           
         }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
@@ -22,5 +22,7 @@ namespace SQLite.Models
         }
 
         public virtual DbSet<General> General{ get; set; }
+
+        public virtual DbSet<General> Register { get; set; }
     }
 }

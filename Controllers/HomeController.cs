@@ -7,6 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BID_E.Models;
 using SQLite.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+using Microsoft.Data.Sqlite;
+using System.Configuration;
+
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BID_E.Controllers
 {
@@ -14,7 +23,7 @@ namespace BID_E.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private DatabaseContext db;
-
+       
         public HomeController(ILogger<HomeController> logger, DatabaseContext _db)
         {
             _logger = logger;
@@ -31,11 +40,6 @@ namespace BID_E.Controllers
             return View();
         }
 
-        public IActionResult Gen()
-        {
-            ViewBag.General = db.General.ToList();
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
