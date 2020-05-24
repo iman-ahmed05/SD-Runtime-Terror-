@@ -50,7 +50,7 @@
             ]);
             var materialOptions = {
                 chart: {
-                    title: 'Province',
+                    title: 'Progression outcomes for students in Mpumalanga',
                 },
 
                 bars: 'vertical',
@@ -65,7 +65,7 @@
         function drawMale() {
             var data = google.visualization.arrayToDataTable(Male);
             var options = {
-                title: 'Male',
+                title: 'Percentage of progression outcomes for Male students in Mpumalanga',
                 pieHole: 0.3,
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
@@ -76,7 +76,7 @@
         function drawFemale() {
             var data = google.visualization.arrayToDataTable(Female);
             var options = {
-                title: 'Female',
+                title: 'Percentage of progression outcomes for Female students in Mpumalanga',
                 pieHole: 0.3,
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));

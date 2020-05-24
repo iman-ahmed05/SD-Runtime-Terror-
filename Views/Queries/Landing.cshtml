@@ -34,11 +34,23 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Race</a>
         <div class="dropdown-menu" style="">
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Black</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Coloured</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Indian</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">White</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race">Other</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceAll">ALL</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceBlack">Black</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceColoured">Coloured</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceIndian">Indian</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceWhite">White</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="RaceChinese">Chinese</a>
+        </div>
+</ul>
+<hr class="my-4" />
+<h5>Gender</h5>
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gender</a>
+        <div class="dropdown-menu" style="">
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">ALL</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">Male</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="GenderAll">Female</a>
         </div>
 </ul>
 <hr class="my-4" />
