@@ -35,7 +35,7 @@
 
             var materialOptions = {
                 chart: {
-                    title: '',
+                    title: 'Progression of outcome for Males',
                 },
                 bars: 'vertical',
             };
@@ -62,7 +62,7 @@
 
             var materialOptions = {
                 chart: {
-                    title: 'Progression outcome for Females',
+                    title: 'Progression of outcome for Females',
                 },
                 bars: 'vertical',
             };
@@ -382,50 +382,43 @@
     </script>
 </head>
 <body>
-    <h5>General Queries For Research</h5>
+    <h4>General Queries For Research</h4>
     <hr class="my-4" />
     <div>
-        <p>This will be the page a user lands on when they click the Graph tab</p>
+        <p>Built For Researchers</p>
+        <p>This platform allows you to identify anomalies, trends and questions that may arise in the data you are presented with</p>
+        <p>Below you will find general graphs that will assist with your research</p>
     </div>
     <hr class="my-4" />
-    <div>
-        <p>Pre determined graphs will be displayed here. This means queries that we decide on will be displayed here every time the user logs in.</p>
-        <p> Example: Number of registrations per year, Percentage of male and female exclusions. Basically Generic queries</p>
-    </div><br />
+    <h5>Number of Registrations Per Year</h5><br />
+    <div  id="barchart_reg" style="width: 900px; height: 500px;"></div>
+    <hr class="my-4" />
 
-
-    <h6>Number of Registrations Per Year</h6>
-    <div id="barchart_reg" style="width: 900px; height: 500px;"></div>
-    <br />
-    <h6>Progression Outcomes Per Year</h6>
+    <h5>Progression of Outcomes Per Year</h5><br />
     <table class="columns">
         <tr>
             <td><div id="piechart2008" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
             <td><div id="piechart2009" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
-
     <table class="columns">
         <tr>
             <td><div id="piechart2010" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
             <td><div id="piechart2011" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
-
     <table class="columns">
         <tr>
             <td><div id="piechart2012" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
             <td><div id="piechart2013" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
-
     <table class="columns">
         <tr>
             <td><div id="piechart2014" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
             <td><div id="piechart2015" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
-
     <table class="columns">
         <tr>
             <td><div id="piechart2016" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
@@ -433,17 +426,17 @@
         </tr>
     </table>
     <div id="piechart2018" style="width: 1000px; height: 300px;border: 1px solid #ccc"></div>
-    <br />
+    <hr class="my-4" />
 
-
-    <h6>Progression Outcomes for Males</h6>
+    <h5>Progression of Outcomes for Males</h5><br />
     <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
-    <br />
-    <h6>Progression Outcomes for Females</h6>
-    <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
-    <br />
-    <h6>Starting Age of Students</h6>
-    <div id="age" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
+    <hr class="my-4" />
 
+    <h5>Progression of Outcomes for Females</h5><br />
+    <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
+    <hr class="my-4" />
+
+    <h5>Starting Age of Students</h5><br />
+    <div id="age" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
 </body>
 </html>
