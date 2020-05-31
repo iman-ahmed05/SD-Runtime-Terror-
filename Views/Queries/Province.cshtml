@@ -1,0 +1,171 @@
+﻿
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['bar'] });
+
+        JSONExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
+        console.log(JSONExcluded);
+        var Excluded = [];
+        Excluded.push(['Year', 'Number']);
+        $.each(JSON.parse(JSONExcluded), function (index, val) {
+            var arrExcluded = [];
+            arrExcluded.push(val.reg_End);
+            arrExcluded.push(val.count);
+            Excluded.push(arrExcluded);
+        });
+
+        JSONQualified = '@Html.Raw(Json.Serialize(ViewBag.Qualified))';
+        console.log(JSONQualified);
+        var Qualified = [];
+        Qualified.push(['Year', 'Number']);
+        $.each(JSON.parse(JSONQualified), function (index, val) {
+            var arrQualified = [];
+            arrQualified.push(val.reg_End);
+            arrQualified.push(val.count);
+            Qualified.push(arrQualified);
+        });
+
+        JSONProceed = '@Html.Raw(Json.Serialize(ViewBag.Proceed))';
+        console.log(JSONProceed);
+        var Proceed = [];
+        Proceed.push(['Year', 'Number']);
+        $.each(JSON.parse(JSONProceed), function (index, val) {
+            var arrProceed = [];
+            arrProceed.push(val.reg_End);
+            arrProceed.push(val.count);
+            Proceed.push(arrProceed);
+        });
+
+        JSONNotCategorised = '@Html.Raw(Json.Serialize(ViewBag.NotCategorised))';
+        console.log(JSONNotCategorised);
+        var NotCategorised = [];
+        NotCategorised.push(['Year', 'Number']);
+        $.each(JSON.parse(JSONNotCategorised), function (index, val) {
+            var arrNotCategorised = [];
+            arrNotCategorised.push(val.reg_End);
+            arrNotCategorised.push(val.count);
+            NotCategorised.push(arrNotCategorised);
+        });
+
+        JSONMale = '@Html.Raw(Json.Serialize(ViewBag.Male))';
+        console.log(JSONMale);
+        var Male = [];
+        Male.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONMale), function (index, val) {
+            var arrMale = [];
+            arrMale.push(val.outcome);
+            arrMale.push(val.count);
+            Male.push(arrMale);
+        });
+
+        JSONFemale = '@Html.Raw(Json.Serialize(ViewBag.Female))';
+        console.log(JSONFemale);
+        var Female = [];
+        Female.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONFemale), function (index, val) {
+            var arrFemale = [];
+            arrFemale.push(val.outcome);
+            arrFemale.push(val.count);
+            Female.push(arrFemale);
+        });
+
+        console.log();
+
+        google.charts.setOnLoadCallback(drawExcluded);
+        function drawExcluded() {
+            var data = google.visualization.arrayToDataTable(Excluded);
+            var materialOptions = {
+                title: 'Students Excluded in @ViewBag.MyString',
+                legend: { position: 'none' },
+                colors: ['#3366CC'],
+            };
+            var materialChart = new google.visualization.LineChart(document.getElementById('barExcluded'));
+            materialChart.draw(data, materialOptions);
+        }
+        google.charts.setOnLoadCallback(drawQualified);
+        function drawQualified() {
+            var data = google.visualization.arrayToDataTable(Qualified);
+            var materialOptions = {
+                title: 'Students Qualified in @ViewBag.MyString',
+                legend: { position: 'none' },
+                colors: ['#109618'],
+            };
+            var materialChart = new google.visualization.LineChart(document.getElementById('barQualified'));
+            materialChart.draw(data, materialOptions);
+        }
+        google.charts.setOnLoadCallback(drawProceed);
+        function drawProceed() {
+            var data = google.visualization.arrayToDataTable(Proceed);
+            var materialOptions = {
+                title: 'Students Proceed in @ViewBag.MyString',
+                legend: { position: 'none' },
+                colors: ['#FF9900'],
+            };
+            var materialChart = new google.visualization.LineChart(document.getElementById('barProceed'));
+            materialChart.draw(data, materialOptions);
+        }
+        google.charts.setOnLoadCallback(drawNotCategorised);
+        function drawNotCategorised() {
+            var data = google.visualization.arrayToDataTable(NotCategorised);
+            var materialOptions = {
+                title: 'Students Not Categorised in @ViewBag.MyString',
+                legend: { position: 'none' },
+                colors: ['#DC3912'],
+            };
+            var materialChart = new google.visualization.LineChart(document.getElementById('barNotCategorised'));
+            materialChart.draw(data, materialOptions);
+        }
+
+        google.charts.setOnLoadCallback(drawMale);
+        function drawMale() {
+            var data = google.visualization.arrayToDataTable(Male);
+            var options = {
+                title: 'Percentage of progression outcomes for Male students in @ViewBag.MyString',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
+            chart.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawFemale);
+        function drawFemale() {
+            var data = google.visualization.arrayToDataTable(Female);
+            var options = {
+                title: 'Percentage of progression outcomes for Female students in @ViewBag.MyString',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
+            chart.draw(data, options);
+        }
+
+    </script>
+</head>
+<body>
+    <h4>@ViewBag.MyString</h4><br />
+    <table class="columns">
+        <tr>
+            <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barQualified" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+    <table class="columns">
+        <tr>
+            <td><div id="barProceed" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barNotCategorised" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+    <hr class="my-4" />
+    <h5>Progression of outcomes by Gender</h5>
+    <br />
+    <table class="columns">
+        <tr>
+            <td><div id="piechartMale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartFemale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+</body>
+</html> 

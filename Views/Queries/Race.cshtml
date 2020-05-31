@@ -1,0 +1,146 @@
+﻿
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['bar'] });
+
+        JSONRace = '@Html.Raw(Json.Serialize(ViewBag.Race))';
+        console.log(JSONRace);
+        var Race = [];
+        Race.push(['Outcome', 'Number']);
+        $.each(JSON.parse(JSONRace), function (index, val) {
+            var arrRace = [];
+            arrRace.push(val.outcome);
+            arrRace.push(val.count);
+            Race.push(arrRace);
+        });
+
+        JSONRaceExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
+        console.log(JSONRaceExcluded);
+        var Excluded = [];
+        Excluded.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceExcluded), function (index, val) {
+            var arrExcluded = [];
+            arrExcluded.push(val.race);
+            arrExcluded.push(val.count);
+            Excluded.push(arrExcluded);
+        });
+
+        JSONRaceProceed = '@Html.Raw(Json.Serialize(ViewBag.Proceed))';
+        console.log(JSONRaceProceed);
+        var Proceed = [];
+        Proceed.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceProceed), function (index, val) {
+            var arrProceed = [];
+            arrProceed.push(val.race);
+            arrProceed.push(val.count);
+            Proceed.push(arrProceed);
+        });
+
+        JSONRaceQualified = '@Html.Raw(Json.Serialize(ViewBag.Qualified))';
+        console.log(JSONRaceQualified);
+        var Qualified = [];
+        Qualified.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceQualified), function (index, val) {
+            var arrQualified = [];
+            arrQualified.push(val.race);
+            arrQualified.push(val.count);
+            Qualified.push(arrQualified);
+        });
+
+        JSONRaceNA = '@Html.Raw(Json.Serialize(ViewBag.NA))';
+        console.log(JSONRaceNA);
+        var NA = [];
+        NA.push(['Race', 'Number']);
+        $.each(JSON.parse(JSONRaceNA), function (index, val) {
+            var arrNA = [];
+            arrNA.push(val.race);
+            arrNA.push(val.count);
+            NA.push(arrNA);
+        });
+
+        console.log();
+
+        google.charts.setOnLoadCallback(drawRace);
+        google.charts.setOnLoadCallback(drawExcluded);
+        google.charts.setOnLoadCallback(drawProceed);
+        google.charts.setOnLoadCallback(drawQualified);
+        google.charts.setOnLoadCallback(drawNA);
+
+        function drawRace() {
+            var data = google.visualization.arrayToDataTable(Race);
+            var options = {
+                title: 'Percentage of progression outcomes for @ViewBag.MyString students',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('pieRace'));
+            chart.draw(data, options);
+        }
+
+        function drawExcluded() {
+            var data = google.visualization.arrayToDataTable(Excluded);
+            var options = {
+                title: 'Excluded',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartExcluded'));
+            chart.draw(data, options);
+        }
+
+        function drawProceed() {
+            var data = google.visualization.arrayToDataTable(Proceed);
+            var options = {
+                title: 'Proceed',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartProceed'));
+            chart.draw(data, options);
+        }
+
+        function drawQualified() {
+            var data = google.visualization.arrayToDataTable(Proceed);
+            var options = {
+                title: 'Qualified',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartQualified'));
+            chart.draw(data, options);
+        }
+
+        function drawNA() {
+            var data = google.visualization.arrayToDataTable(NA);
+            var options = {
+                title: 'Not Categorised',
+                pieHole: 0.3,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechartNA'));
+            chart.draw(data, options);
+        }
+
+
+    </script>
+</head>
+<body>
+    <h4>@ViewBag.MyString Students</h4><br />
+    <div id="pieRace" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <hr class="my-4" />
+    <h5>Overall percentage of progression outcomes by race</h5><br />
+
+    <table class="columns">
+        <tr>
+            <td><div id="piechartExcluded" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartProceed" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+    <table class="columns">
+        <tr>
+            <td><div id="piechartQualified" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartNA" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+</body>
+</html> 

@@ -41,6 +41,13 @@ namespace BID_E.Models
 
     }
 
+    public class LookupProv
+    {
+        public String reg_End { get; set; }
+        public int count { get; set; }
+
+    }
+
     public class LookupRace
     {
         public String race { get; set; }

@@ -7,6 +7,17 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
+        JSONAge = '@Html.Raw(Json.Serialize(ViewBag.Age))';
+        console.log(JSONAge);
+        var Age = [];
+        Age.push(['Age', 'Number']);
+        $.each(JSON.parse(JSONAge), function (index, val) {
+            var arrAge = [];
+            arrAge.push(val.end_Age);
+            arrAge.push(val.count);
+            Age.push(arrAge);
+        });
+
         JSONMale = '@Html.Raw(Json.Serialize(ViewBag.Male))';
         console.log(JSONMale);
         var Male = [];
@@ -17,6 +28,7 @@
             arrMale.push(val.count);
             Male.push(arrMale);
         });
+
         JSONFemale = '@Html.Raw(Json.Serialize(ViewBag.Female))';
         console.log(JSONFemale);
         var Female = [];
@@ -31,20 +43,16 @@
         google.charts.setOnLoadCallback(drawBar);
 
         function drawBar() {
-            var data = google.visualization.arrayToDataTable([
-                ['Age', 'Excluded', { role: 'annotation' }],
-                ['16', 1, ''],
-                ['17', 5, ''],
-                ['18', 102, ''],
-                ['19', 408, ''],
-                ['20', 459, ''],
-            ]);
+            var data = google.visualization.arrayToDataTable(Age);
 
             var materialOptions = {
                 chart: {
-                    title: 'Number of students Excluded from Ages 16-20',
+                    title: 'Number of students Excluded',
                 },
-                bars: 'vertical',
+                bars: 'horizontal',
+                legend: { position: 'none' },
+                colors: ['#DD4477'],
+
             };
             var materialChart = new google.charts.Bar(document.getElementById('Bar'));
             materialChart.draw(data, materialOptions);
@@ -77,6 +85,8 @@
     </script>
 </head>
 <body>
+    <h4>Students between age @ViewBag.MyString</h4><br />
+
     <div id="Bar" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
     <br />
     <table class="columns">

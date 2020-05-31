@@ -48,140 +48,6 @@ namespace BID_E.Controllers
         {
             return View();
         }
-        public IActionResult RaceBlack()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupRace = new List<LookupOutcome>();
-
-            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='Black' GROUP BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Race, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupRace.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Race = groupRace;
-            return View();
-        }
-
-        public IActionResult RaceColoured()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupRace = new List<LookupOutcome>();
-
-            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='Coloured' GROUP BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Race, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupRace.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Race = groupRace;
-            return View();
-        }
-
-        public IActionResult RaceIndian()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupRace = new List<LookupOutcome>();
-
-            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='Indian' GROUP BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Race, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupRace.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Race = groupRace;
-            return View();
-        }
-
-        public IActionResult RaceWhite()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupRace = new List<LookupOutcome>();
-
-            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='White' GROUP BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Race, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupRace.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Race = groupRace;
-            return View();
-        }
-
-        public IActionResult RaceChinese()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupRace = new List<LookupOutcome>();
-
-            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='Chinese' GROUP BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Race, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupRace.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Race = groupRace;
-            return View();
-        }
 
         public IActionResult RaceAll()
         {
@@ -250,22 +116,37 @@ namespace BID_E.Controllers
 
         }
 
-        public IActionResult Age()
+        public IActionResult Age(string id)
         {
             string cs = "Filename =./SD.db";
             SqliteConnection conn = new SqliteConnection(cs);
             SqliteCommand cmd;
+            List<LookupAge> groupAge = new List<LookupAge>();
             List<LookupAge> groupMale = new List<LookupAge>();
             List<LookupAge> groupFemale = new List<LookupAge>();
 
-            string Male = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN 5 AND 20 GROUP BY END_AGE ORDER BY END_AGE";
-            string Female = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN 5 AND 20 GROUP BY END_AGE ORDER BY END_AGE";
+            string age = id;
+            ViewBag.MyString = id;
+
+            string ageFilter = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT='Excluded' AND END_AGE BETWEEN " + age + " GROUP BY END_AGE ORDER BY END_AGE";
+            string Male = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER = 'M' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN " + age + " GROUP BY END_AGE ORDER BY END_AGE";
+            string Female = "SELECT END_AGE, COUNT(*)  FROM GENERAL WHERE GENDER = 'F' AND YOS3_OUT='Excluded' AND END_AGE BETWEEN " + age + " GROUP BY END_AGE ORDER BY END_AGE";
 
             conn.Open();
             if ((conn.State & System.Data.ConnectionState.Open) > 0)
             {
-                cmd = new SqliteCommand(Male, conn);
+                cmd = new SqliteCommand(ageFilter, conn);
                 SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupAge obj = new LookupAge();
+                    obj.End_Age = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupAge.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Male, conn);
+                reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     LookupAge obj = new LookupAge();
@@ -285,28 +166,112 @@ namespace BID_E.Controllers
                 }
             }
             conn.Close();
+            ViewBag.Age = groupAge;
             ViewBag.Male = groupMale;
             ViewBag.Female = groupFemale;
             return View();
 
         }
 
-        public IActionResult EasternCape()
+        public IActionResult Province(string id)
         {
             string cs = "Filename =./SD.db";
             SqliteConnection conn = new SqliteConnection(cs);
             SqliteCommand cmd;
             List<LookupOutcome> groupMale = new List<LookupOutcome>();
             List<LookupOutcome> groupFemale = new List<LookupOutcome>();
+            List<LookupProv> groupExcluded = new List<LookupProv>();
+            List<LookupProv> groupQualified = new List<LookupProv>();
+            List<LookupProv> groupProceed = new List<LookupProv>();
+            List<LookupProv> groupNotCategorised = new List<LookupProv>();
 
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='EC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='EC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
+            string prov = id;
 
+            if (id == "EC")
+            {
+                ViewBag.MyString = "Eastern Cape";
+            }
+            else if (id == "FS")
+            {
+                ViewBag.MyString = "Free State";
+            }
+            else if (id == "GA")
+            {
+                ViewBag.MyString = "Gauteng";
+            }
+            else if (id == "KZ")
+            {
+                ViewBag.MyString = "KwaZulu-Natal";
+            }
+            else if (id == "LP")
+            {
+                ViewBag.MyString = "Limpopo";
+            }
+            else if (id == "MP")
+            {
+                ViewBag.MyString = "Mpumalanga";
+            }
+            else if (id == "NC")
+            {
+                ViewBag.MyString = "Northern Cape";
+            }
+            else if (id == "NW")
+            {
+                ViewBag.MyString = "North West";
+            }
+            else
+            {
+                ViewBag.MyString = "Western Cape";
+            }
+            String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+            String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+            String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+            String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+
+            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='" + prov + "' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
+            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='" + prov + "' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
             conn.Open();
             if ((conn.State & System.Data.ConnectionState.Open) > 0)
             {
-                cmd = new SqliteCommand(Male, conn);
+                cmd = new SqliteCommand(Excluded, conn);
                 SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupExcluded.Add(obj);
+                }
+                cmd = new SqliteCommand(Qualified, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupQualified.Add(obj);
+                }
+                cmd = new SqliteCommand(Proceed, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupProceed.Add(obj);
+                }
+                cmd = new SqliteCommand(NotCategorised, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupNotCategorised.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Male, conn);
+                reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     LookupOutcome obj = new LookupOutcome();
@@ -326,332 +291,17 @@ namespace BID_E.Controllers
                 }
             }
             conn.Close();
+            ViewBag.Excluded = groupExcluded;
+            ViewBag.Qualified = groupQualified;
+            ViewBag.Proceed = groupProceed;
+            ViewBag.NotCategorised = groupNotCategorised;
             ViewBag.Male = groupMale;
             ViewBag.Female = groupFemale;
             return View();
+
         }
 
-        public IActionResult FreeState()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='FS' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='FS' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult Gauteng()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='GA' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='GA' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult KZN()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='KZ' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='KZ' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult Limpopo()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='LP' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='LP' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult Mpumalanga()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='MP' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='MP' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult NorthWest()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='NW' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='NW' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult NorthernCape()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='NC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='NC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult WesternCape()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupOutcome> groupMale = new List<LookupOutcome>();
-            List<LookupOutcome> groupFemale = new List<LookupOutcome>();
-
-            string Male = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='M' AND HOME_PROVINCE ='WC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-            string Female = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE GENDER='F' AND HOME_PROVINCE ='WC' GROUP BY YOS3_OUT ORDER BY YOS3_OUT";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Male, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupOutcome obj = new LookupOutcome();
-                    obj.outcome = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            return View();
-        }
-
-        public IActionResult Race()
+        public IActionResult Race(string id)
         {
             string cs = "Filename =./SD.db";
             SqliteConnection conn = new SqliteConnection(cs);
@@ -660,7 +310,13 @@ namespace BID_E.Controllers
             List<LookupRace> groupProceed = new List<LookupRace>();
             List<LookupRace> groupQualified = new List<LookupRace>();
             List<LookupRace> groupNA = new List<LookupRace>();
+            List<LookupOutcome> groupRace = new List<LookupOutcome>();
 
+            string race = id;
+            ViewBag.MyString = id;
+
+            conn.Close();
+            string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='" + race + "' GROUP BY YOS3_OUT";
             string Excluded = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Excluded' GROUP BY RACE";
             string Proceed = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Proceed' GROUP BY RACE";
             string Qualified = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Qualified' GROUP BY RACE";
@@ -669,8 +325,18 @@ namespace BID_E.Controllers
             conn.Open();
             if ((conn.State & System.Data.ConnectionState.Open) > 0)
             {
-                cmd = new SqliteCommand(Excluded, conn);
+                cmd = new SqliteCommand(Race, conn);
                 SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupOutcome obj = new LookupOutcome();
+                    obj.outcome = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupRace.Add(obj);
+                }
+
+                cmd = new SqliteCommand(Excluded, conn);
+                reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     LookupRace obj = new LookupRace();
@@ -710,6 +376,7 @@ namespace BID_E.Controllers
                 }
             }
             conn.Close();
+            ViewBag.Race = groupRace;
             ViewBag.Excluded = groupExcluded;
             ViewBag.Proceed = groupProceed;
             ViewBag.Qualified = groupQualified;
