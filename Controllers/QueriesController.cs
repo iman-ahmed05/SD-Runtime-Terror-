@@ -44,76 +44,9 @@ namespace BID_E.Controllers
             return View();
         }
 
-        public IActionResult GenderAll()
+        public IActionResult Gender()
         {
             return View();
-        }
-
-        public IActionResult RaceAll()
-        {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupRace> groupExcluded = new List<LookupRace>();
-            List<LookupRace> groupProceed = new List<LookupRace>();
-            List<LookupRace> groupQualified = new List<LookupRace>();
-            List<LookupRace> groupNA = new List<LookupRace>();
-
-            string Excluded = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Excluded' GROUP BY RACE";
-            string Proceed = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Proceed' GROUP BY RACE";
-            string Qualified = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Qualified' GROUP BY RACE";
-            string NA = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Not Categorised' GROUP BY RACE";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Excluded, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupRace obj = new LookupRace();
-                    obj.race = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupExcluded.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Proceed, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupRace obj = new LookupRace();
-                    obj.race = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupQualified.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Qualified, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupRace obj = new LookupRace();
-                    obj.race = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupProceed.Add(obj);
-                }
-
-                cmd = new SqliteCommand(NA, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupRace obj = new LookupRace();
-                    obj.race = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupNA.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Excluded = groupExcluded;
-            ViewBag.Proceed = groupProceed;
-            ViewBag.Qualified = groupQualified;
-            ViewBag.NA = groupNA;
-            return View();
-
         }
 
         public IActionResult Age(string id)
