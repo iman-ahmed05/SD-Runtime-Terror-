@@ -49,6 +49,83 @@ namespace BID_E.Controllers
             return View();
         }
 
+        public IActionResult Query(string id)
+        {
+
+
+            ViewBag.MyString = id;
+            String prov = id.Substring(0, 2);
+            String gender = id.Substring(2, 1);
+            String age = id.Substring(3, 9);
+            String a = age.Substring(0, 2); ;
+            String b = age.Substring(7, 2); ;
+            String race = id.Substring(12);
+            ViewBag.Prov = prov;
+            ViewBag.Gender = gender;
+            ViewBag.Age = age;
+            ViewBag.Race = race;
+
+            string cs = "Filename =./SD.db";
+            SqliteConnection conn = new SqliteConnection(cs);
+            SqliteCommand cmd;
+            List<LookupProv> groupExcluded = new List<LookupProv>();
+            List<LookupProv> groupQualified = new List<LookupProv>();
+            List<LookupProv> groupProceed = new List<LookupProv>();
+            List<LookupProv> groupNotCategorised = new List<LookupProv>();
+
+            String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+            String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+            String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+            String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+            conn.Open();
+            if ((conn.State & System.Data.ConnectionState.Open) > 0)
+            {
+                cmd = new SqliteCommand(Excluded, conn);
+                SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupExcluded.Add(obj);
+                }
+                cmd = new SqliteCommand(Qualified, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupQualified.Add(obj);
+                }
+                cmd = new SqliteCommand(Proceed, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupProceed.Add(obj);
+                }
+                cmd = new SqliteCommand(NotCategorised, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    LookupProv obj = new LookupProv();
+                    obj.reg_End = reader.GetValue(0).ToString();
+                    obj.count = reader.GetInt32(1);
+                    groupNotCategorised.Add(obj);
+                }
+            }
+            conn.Close();
+            ViewBag.Excluded = groupExcluded;
+            ViewBag.Qualified = groupQualified;
+            ViewBag.Proceed = groupProceed;
+            ViewBag.NotCategorised = groupNotCategorised;
+
+            return View();
+        }
+
         public IActionResult Age(string id)
         {
             string cs = "Filename =./SD.db";

@@ -215,8 +215,7 @@
         </div>
     </div>
     <div class="row">
-        <button type="submit" class="btn btn-dark">Submit Query</button>
-    </div>
+        <input type='button' class="btn btn-dark" value='Submit' id='myButton' onClick='displayRadioValue()' />    </div>
     <br>
     <div class="row">
         <button id="clear-button" class="btn btn-dark">Clear</button>
@@ -224,6 +223,46 @@
 </div>
 
 <script type="text/javascript">
+    
+
+    function displayRadioValue() {
+        var province;
+        var race;
+        var gender;
+        var age;
+
+        var ele = document.getElementsByName('province');
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].checked)
+                province = ele[i].value;
+        }
+
+        var ele1 = document.getElementsByName('race');
+        for (i = 0; i < ele1.length; i++) {
+            if (ele1[i].checked)
+                race = ele1[i].value;
+            
+        }
+        var ele2 = document.getElementsByName('gender');
+        for (i = 0; i < ele2.length; i++) {
+            if (ele2[i].checked)
+                gender = ele2[i].value;
+        }
+
+        var ele3 = document.getElementsByName('age');
+        for (i = 0; i < ele3.length; i++) {
+            if (ele3[i].checked)
+                age = ele3[i].value;
+
+        }
+        var id = province + gender + age  + race;
+        document.location = 'Query/' + id;
+    }
+
+    function redirectOnClick() {
+        document.location = 'Query/' + val;
+    }
+
     document.getElementById('clear-button').addEventListener('click', function () {
         ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function(id) {
         document.getElementById(id).checked = false;
