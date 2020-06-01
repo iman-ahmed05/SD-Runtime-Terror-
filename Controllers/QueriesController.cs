@@ -57,8 +57,6 @@ namespace BID_E.Controllers
             String prov = id.Substring(0, 2);
             String gender = id.Substring(2, 1);
             String age = id.Substring(3, 9);
-            String a = age.Substring(0, 2); ;
-            String b = age.Substring(7, 2); ;
             String race = id.Substring(12);
             ViewBag.Prov = prov;
             ViewBag.Gender = gender;
