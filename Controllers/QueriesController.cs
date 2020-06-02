@@ -51,76 +51,351 @@ namespace BID_E.Controllers
 
         public IActionResult Query(string id)
         {
-
-
             ViewBag.MyString = id;
-            String prov = id.Substring(0, 2);
-            String gender = id.Substring(2, 1);
-            String age = id.Substring(3, 9);
-            String race = id.Substring(12);
-            ViewBag.Prov = prov;
-            ViewBag.Gender = gender;
-            ViewBag.Age = age;
-            ViewBag.Race = race;
-
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupProv> groupExcluded = new List<LookupProv>();
-            List<LookupProv> groupQualified = new List<LookupProv>();
-            List<LookupProv> groupProceed = new List<LookupProv>();
-            List<LookupProv> groupNotCategorised = new List<LookupProv>();
-
-            String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
-            String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
-            String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
-            String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
+            if ((id.Contains("EC")| id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
+                (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M,") | id.Contains(",F,") ))
             {
-                cmd = new SqliteCommand(Excluded, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupProv obj = new LookupProv();
-                    obj.reg_End = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupExcluded.Add(obj);
-                }
-                cmd = new SqliteCommand(Qualified, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupProv obj = new LookupProv();
-                    obj.reg_End = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupQualified.Add(obj);
-                }
-                cmd = new SqliteCommand(Proceed, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupProv obj = new LookupProv();
-                    obj.reg_End = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupProceed.Add(obj);
-                }
-                cmd = new SqliteCommand(NotCategorised, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupProv obj = new LookupProv();
-                    obj.reg_End = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupNotCategorised.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Excluded = groupExcluded;
-            ViewBag.Qualified = groupQualified;
-            ViewBag.Proceed = groupProceed;
-            ViewBag.NotCategorised = groupNotCategorised;
+                String prov = id.Substring(0, 2);
+                String gender = id.Substring(3, 1);
+                String age = id.Substring(5, 9);
+                String race = id.Substring(15);
+                ViewBag.Prov = prov;
+                ViewBag.Gender = gender;
+                ViewBag.Age = age;
+                ViewBag.Race = race;
+ 
+                string cs = "Filename =./SD.db";
+                SqliteConnection conn = new SqliteConnection(cs);
+                SqliteCommand cmd;
+                List<LookupProv> groupExcluded = new List<LookupProv>();
+                List<LookupProv> groupQualified = new List<LookupProv>();
+                List<LookupProv> groupProceed = new List<LookupProv>();
+                List<LookupProv> groupNotCategorised = new List<LookupProv>();
 
+                String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+                String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+                String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+                String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+                conn.Open();
+                if ((conn.State & System.Data.ConnectionState.Open) > 0)
+                {
+                    cmd = new SqliteCommand(Excluded, conn);
+                    SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupExcluded.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Qualified, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupQualified.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Proceed, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupProceed.Add(obj);
+                    }
+                    cmd = new SqliteCommand(NotCategorised, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupNotCategorised.Add(obj);
+                    }
+                }
+                conn.Close();
+                ViewBag.Excluded = groupExcluded;
+                ViewBag.Qualified = groupQualified;
+                ViewBag.Proceed = groupProceed;
+                ViewBag.NotCategorised = groupNotCategorised;
+
+            }
+            else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
+                (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") == false & (id.Contains(",M") | id.Contains(",F")))
+            {
+                String prov = id.Substring(0, 2);
+                String gender = id.Substring(3, 1);
+                String race = id.Substring(15);
+                ViewBag.Prov = prov;
+                ViewBag.Gender = gender;
+                ViewBag.Race = race;
+
+                string cs = "Filename =./SD.db";
+                SqliteConnection conn = new SqliteConnection(cs);
+                SqliteCommand cmd;
+                List<LookupProv> groupExcluded = new List<LookupProv>();
+                List<LookupProv> groupQualified = new List<LookupProv>();
+                List<LookupProv> groupProceed = new List<LookupProv>();
+                List<LookupProv> groupNotCategorised = new List<LookupProv>();
+
+                String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+                String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+                String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+                String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+                conn.Open();
+                if ((conn.State & System.Data.ConnectionState.Open) > 0)
+                {
+                    cmd = new SqliteCommand(Excluded, conn);
+                    SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupExcluded.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Qualified, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupQualified.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Proceed, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupProceed.Add(obj);
+                    }
+                    cmd = new SqliteCommand(NotCategorised, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupNotCategorised.Add(obj);
+                    }
+                }
+                conn.Close();
+                ViewBag.Excluded = groupExcluded;
+                ViewBag.Qualified = groupQualified;
+                ViewBag.Proceed = groupProceed;
+                ViewBag.NotCategorised = groupNotCategorised;
+            }
+            else if ((id.Contains("EC") == false | id.Contains("FS") == false | id.Contains("GA") == false | id.Contains("LP") == false | id.Contains("MP") == false | id.Contains("NW") == false | id.Contains("NC") == false | id.Contains("WC") == false | id.Contains("KZ") == false) &
+               (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M") | id.Contains(",F")))
+            {
+                String gender = id.Substring(10, 1);
+                String age = id.Substring(12, 9);
+                String race = id.Substring(22);
+                ViewBag.Gender = gender;
+                ViewBag.Age = age;
+                ViewBag.Race = race;
+
+                string cs = "Filename =./SD.db";
+                SqliteConnection conn = new SqliteConnection(cs);
+                SqliteCommand cmd;
+                List<LookupProv> groupExcluded = new List<LookupProv>();
+                List<LookupProv> groupQualified = new List<LookupProv>();
+                List<LookupProv> groupProceed = new List<LookupProv>();
+                List<LookupProv> groupNotCategorised = new List<LookupProv>();
+
+                String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+                String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+                String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+                String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+                conn.Open();
+                if ((conn.State & System.Data.ConnectionState.Open) > 0)
+                {
+                    cmd = new SqliteCommand(Excluded, conn);
+                    SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupExcluded.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Qualified, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupQualified.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Proceed, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupProceed.Add(obj);
+                    }
+                    cmd = new SqliteCommand(NotCategorised, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupNotCategorised.Add(obj);
+                    }
+                }
+                conn.Close();
+                ViewBag.Excluded = groupExcluded;
+                ViewBag.Qualified = groupQualified;
+                ViewBag.Proceed = groupProceed;
+                ViewBag.NotCategorised = groupNotCategorised;
+            }
+            else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
+                (id.Contains("Black") == false | id.Contains("Coloured") == false | id.Contains("Chinese") == false | id.Contains("Indian") == false | id.Contains("White") == false) & id.Contains("AND") & (id.Contains(",M") | id.Contains(",F")))
+            {
+                String prov = id.Substring(0, 2);
+                String gender = id.Substring(3, 1);
+                String age = id.Substring(5, 9);
+                ViewBag.Prov = prov;
+                ViewBag.Gender = gender;
+                ViewBag.Age = age;
+
+                string cs = "Filename =./SD.db";
+                SqliteConnection conn = new SqliteConnection(cs);
+                SqliteCommand cmd;
+                List<LookupProv> groupExcluded = new List<LookupProv>();
+                List<LookupProv> groupQualified = new List<LookupProv>();
+                List<LookupProv> groupProceed = new List<LookupProv>();
+                List<LookupProv> groupNotCategorised = new List<LookupProv>();
+
+                String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+                String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+                String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+                String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+                conn.Open();
+                if ((conn.State & System.Data.ConnectionState.Open) > 0)
+                {
+                    cmd = new SqliteCommand(Excluded, conn);
+                    SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupExcluded.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Qualified, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupQualified.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Proceed, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupProceed.Add(obj);
+                    }
+                    cmd = new SqliteCommand(NotCategorised, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupNotCategorised.Add(obj);
+                    }
+                }
+                conn.Close();
+                ViewBag.Excluded = groupExcluded;
+                ViewBag.Qualified = groupQualified;
+                ViewBag.Proceed = groupProceed;
+                ViewBag.NotCategorised = groupNotCategorised;
+            }
+            else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
+               (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M,") == false | id.Contains(",F,") == false))
+
+            {
+                String prov = id.Substring(0, 2);
+                String age = id.Substring(13, 9);
+                String race = id.Substring(23);
+                ViewBag.Prov = prov;
+                ViewBag.Age = age;
+                ViewBag.Race = race;
+
+                string cs = "Filename =./SD.db";
+                SqliteConnection conn = new SqliteConnection(cs);
+                SqliteCommand cmd;
+                List<LookupProv> groupExcluded = new List<LookupProv>();
+                List<LookupProv> groupQualified = new List<LookupProv>();
+                List<LookupProv> groupProceed = new List<LookupProv>();
+                List<LookupProv> groupNotCategorised = new List<LookupProv>();
+
+                String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
+                String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
+                String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
+                String NotCategorised = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + " AND YOS3_OUT = 'Not Categorised' GROUP BY REG_END ORDER BY REG_END";
+                conn.Open();
+                if ((conn.State & System.Data.ConnectionState.Open) > 0)
+                {
+                    cmd = new SqliteCommand(Excluded, conn);
+                    SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupExcluded.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Qualified, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupQualified.Add(obj);
+                    }
+                    cmd = new SqliteCommand(Proceed, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupProceed.Add(obj);
+                    }
+                    cmd = new SqliteCommand(NotCategorised, conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        LookupProv obj = new LookupProv();
+                        obj.reg_End = reader.GetValue(0).ToString();
+                        obj.count = reader.GetInt32(1);
+                        groupNotCategorised.Add(obj);
+                    }
+                }
+                conn.Close();
+                ViewBag.Excluded = groupExcluded;
+                ViewBag.Qualified = groupQualified;
+                ViewBag.Proceed = groupProceed;
+                ViewBag.NotCategorised = groupNotCategorised;
+            }
             return View();
         }
 

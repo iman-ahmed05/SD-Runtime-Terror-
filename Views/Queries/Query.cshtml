@@ -57,56 +57,121 @@
         function drawExcluded() {
             var data = google.visualization.arrayToDataTable(Excluded);
             var materialOptions = {
-                title: 'Students Excluded in',
+                chart: {
+                    title: 'Excluded',
+                },
                 legend: { position: 'none' },
                 colors: ['#3366CC'],
             };
-            var materialChart = new google.visualization.LineChart(document.getElementById('barExcluded'));
+            var materialChart = new google.charts.Bar(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
         }
         google.charts.setOnLoadCallback(drawQualified);
         function drawQualified() {
             var data = google.visualization.arrayToDataTable(Qualified);
             var materialOptions = {
-                title: 'Students Qualified in',
+                chart: {
+                    title: 'Qualified',
+                },
                 legend: { position: 'none' },
                 colors: ['#109618'],
             };
-            var materialChart = new google.visualization.LineChart(document.getElementById('barQualified'));
+            var materialChart = new google.charts.Bar(document.getElementById('barQualified'));
             materialChart.draw(data, materialOptions);
         }
         google.charts.setOnLoadCallback(drawProceed);
         function drawProceed() {
             var data = google.visualization.arrayToDataTable(Proceed);
             var materialOptions = {
-                title: 'Students Proceed in',
+                chart: {
+                    title: 'Proceed',
+                },
                 legend: { position: 'none' },
                 colors: ['#FF9900'],
             };
-            var materialChart = new google.visualization.LineChart(document.getElementById('barProceed'));
+            var materialChart = new google.charts.Bar(document.getElementById('barProceed'));
             materialChart.draw(data, materialOptions);
         }
-        google.charts.setOnLoadCallback(drawNotCategorised);
-        function drawNotCategorised() {
-            var data = google.visualization.arrayToDataTable(NotCategorised);
-            var materialOptions = {
-                title: 'Students Not Categorised ',
-                legend: { position: 'none' },
-                colors: ['#DC3912'],
-            };
-            var materialChart = new google.visualization.LineChart(document.getElementById('barNotCategorised'));
-            materialChart.draw(data, materialOptions);
-        }
+
+            google.charts.setOnLoadCallback(drawNotCategorised);
+            function drawNotCategorised() {
+                var data = google.visualization.arrayToDataTable(NotCategorised);
+                var materialOptions = {
+                    chart: {
+                        title: 'Not Categorised',
+                    },
+                    legend: { position: 'none' },
+                    colors: ['#DC3912'],
+
+                };
+                var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
+                materialChart.draw(data, materialOptions);
+            }
+
 
     </script>
 </head>
 <body>
-    <h4>@ViewBag.MyString</h4><br />
-    <h4>@ViewBag.Prov</h4><br />
-    <h4>@ViewBag.Gender</h4><br />
-    <h4>@ViewBag.Race</h4><br />
-    <h4>@ViewBag.Age</h4><br />
-
+    <h3>FILTERS</h3><br />
+    @if (ViewBag.Prov != null)
+    {
+        if (ViewBag.Prov == "EC")
+        {
+            <h4>PROVINCE: Eastern Cape</h4>
+        }
+        else if (ViewBag.Prov == "FS")
+        {
+            <h4>PROVINCE: Free State</h4>
+        }
+        else if (ViewBag.Prov == "GA")
+        {
+            <h4>PROVINCE: Gauteng</h4>
+        }
+        else if (ViewBag.Prov == "KZ")
+        {
+            <h4>PROVINCE: KwaZulu-Natal</h4>
+        }
+        else if (ViewBag.Prov == "LP")
+        {
+            <h4>PROVINCE: Limpopo</h4>
+        }
+        else if (ViewBag.Prov == "MP")
+        {
+            <h4>PROVINCE: Mpumalanga</h4>
+        }
+        else if (ViewBag.Prov == "NC")
+        {
+            <h4>PROVINCE: Northern Cap</h4>
+        }
+        else if (ViewBag.Prov == "NW")
+        {
+            <h4>PROVINCE: North West</h4>
+        }
+        else
+        {
+            <h4>PROVINCE: Western Cape</h4>
+        }
+    }
+    @if (ViewBag.Gender != null)
+    {
+        if (ViewBag.Prov == "M")
+        {
+            <h4>GENDER: Male</h4>
+        }
+        else
+        {
+            <h4>GENDER: Female</h4>
+        }
+    }
+    @if (ViewBag.Race != null)
+    {
+        <h4>RACE: @ViewBag.Race</h4>
+    }
+    @if (ViewBag.Age != null)
+    {
+        <h4>AGE RANGE: @ViewBag.Age</h4>
+    }
+    <hr class="my-4" />
     <table class="columns">
         <tr>
             <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>

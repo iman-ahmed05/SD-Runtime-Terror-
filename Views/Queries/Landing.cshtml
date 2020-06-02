@@ -224,43 +224,52 @@
 
 <script type="text/javascript">
     
-
     function displayRadioValue() {
         var province;
         var race;
         var gender;
         var age;
+        var p = false;
+        var r = false;
+        var g=false;
+        var a = false;
 
         var ele = document.getElementsByName('province');
         for (i = 0; i < ele.length; i++) {
-            if (ele[i].checked)
+            if (ele[i].checked) {
                 province = ele[i].value;
+                p = true;
+            }
         }
-
         var ele1 = document.getElementsByName('race');
         for (i = 0; i < ele1.length; i++) {
-            if (ele1[i].checked)
+            if (ele1[i].checked) {
                 race = ele1[i].value;
-            
+                r = true;
+            }
         }
         var ele2 = document.getElementsByName('gender');
         for (i = 0; i < ele2.length; i++) {
-            if (ele2[i].checked)
+            if (ele2[i].checked) {
                 gender = ele2[i].value;
+                g = true;
+            }
         }
 
         var ele3 = document.getElementsByName('age');
         for (i = 0; i < ele3.length; i++) {
-            if (ele3[i].checked)
+            if (ele3[i].checked) {
                 age = ele3[i].value;
-
+                a = true;
+            }
         }
-        var id = province + gender + age  + race;
-        document.location = 'Query/' + id;
-    }
 
-    function redirectOnClick() {
-        document.location = 'Query/' + val;
+        if ((p & r & g & a) | (p & r & a) | (p & r & g) | (r & g & a) | (p & g & a)) {
+            var id = province + "," + gender + "," + age + "," + race;
+            document.location = 'Query/' + id;
+        } else {
+            alert("Please select 3 or more filters");
+        }
     }
 
     document.getElementById('clear-button').addEventListener('click', function () {
