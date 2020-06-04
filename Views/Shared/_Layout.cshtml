@@ -34,7 +34,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-info navbar-brand pull-right" onClick='displayLogout()'>
+                    <a class="btn btn-info navbar-brand pull-right" asp-controller="Login" asp-action="Logout">
                         <span class="glyphicon glyphicon-log-out"></span> Log out
                     </a>
                 }
@@ -53,8 +53,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-<script type="text/javascript">function displayLogout() {
-        document.location = 'https://localhost:5001';
-    }
-</script>
