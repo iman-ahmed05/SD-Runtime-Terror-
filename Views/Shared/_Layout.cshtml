@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +18,11 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                @if (Context.Session.GetString("UserId") != null)
+                {
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
 
-                        @if (Context.Session.GetString("UserId") != null)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Graphs" asp-action="Landing">Graphs</a>
                             </li>
@@ -32,10 +32,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                             </li>
-                        }
-
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-info navbar-brand pull-right" onClick='displayLogout()'>
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a>
+                }
             </div>
         </nav>
     </header>
@@ -51,3 +53,8 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<script type="text/javascript">function displayLogout() {
+        document.location = 'https://localhost:5001';
+    }
+</script>
