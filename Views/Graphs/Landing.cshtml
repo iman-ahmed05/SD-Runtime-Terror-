@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Graphs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -34,7 +34,9 @@
             ]);
 
             var materialOptions = {
-
+                chart: {
+                    title: 'Progression of outcome for Males',
+                },
                 bars: 'vertical',
             };
             var materialChart = new google.charts.Bar(document.getElementById('barMale'));
@@ -59,7 +61,9 @@
             ]);
 
             var materialOptions = {
-
+                chart: {
+                    title: 'Progression of outcome for Females',
+                },
                 bars: 'vertical',
             };
             var materialChart = new google.charts.Bar(document.getElementById('barFemale'));
@@ -86,7 +90,8 @@
 
             var materialOptions = {
                 chart: {
-                    title: 'Categorised by Male & Female for Ages 5 to 25',
+                    title: '',
+                    subtitle: 'Categorised by Male & Female for Ages 5 to 25',
                 },
                 bars: 'vertical',
             };
@@ -426,14 +431,14 @@
     <hr class="my-4" />
 
     <h5>Progression of Outcomes for Males</h5><br />
-    <div id="barMale" style="width: 1000px; height: 500px;"></div>
+    <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
     <hr class="my-4" />
 
     <h5>Progression of Outcomes for Females</h5><br />
-    <div id="barFemale" style="width: 1000px; height: 500px;"></div>
+    <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
     <hr class="my-4" />
 
     <h5>Starting Age of Students</h5><br />
-    <div id="age" style="width: 1000px; height: 500px;"></div>
+    <div id="age" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
 </body>
 </html>
