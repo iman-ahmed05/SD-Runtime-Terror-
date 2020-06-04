@@ -81,7 +81,7 @@
             var materialOptions = {
                 title: 'Students Excluded in @ViewBag.MyString',
                 legend: { position: 'none' },
-                colors: ['#3366CC'],
+                colors: ['#DC3912'],
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
@@ -103,7 +103,7 @@
             var materialOptions = {
                 title: 'Students Proceed in @ViewBag.MyString',
                 legend: { position: 'none' },
-                colors: ['#FF9900'],
+                colors: ['#3366CC'],
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barProceed'));
             materialChart.draw(data, materialOptions);
@@ -114,7 +114,7 @@
             var materialOptions = {
                 title: 'Students Not Categorised in @ViewBag.MyString',
                 legend: { position: 'none' },
-                colors: ['#DC3912'],
+                colors: ['#FF9900'],
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barNotCategorised'));
             materialChart.draw(data, materialOptions);
@@ -126,6 +126,8 @@
             var options = {
                 title: 'Percentage of progression outcomes for Male students in @ViewBag.MyString',
                 pieHole: 0.3,
+                colors: ['#DC3912', '#FF9900', '#3366CC', '#109618'],
+
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
             chart.draw(data, options);
@@ -137,6 +139,8 @@
             var options = {
                 title: 'Percentage of progression outcomes for Female students in @ViewBag.MyString',
                 pieHole: 0.3,
+                colors: ['#DC3912', '#FF9900', '#3366CC', '#109618'],
+
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
             chart.draw(data, options);

@@ -75,6 +75,8 @@
             var options = {
                 title: 'Percentage of progression outcomes for @ViewBag.MyString students',
                 pieHole: 0.3,
+                colors: ['#DC3912', '#FF9900', '#3366CC', '#109618'],
+
             };
             var chart = new google.visualization.PieChart(document.getElementById('pieRace'));
             chart.draw(data, options);
@@ -86,6 +88,7 @@
                 title: 'Excluded',
                 pieHole: 0.3,
             };
+
             var chart = new google.visualization.PieChart(document.getElementById('piechartExcluded'));
             chart.draw(data, options);
         }
