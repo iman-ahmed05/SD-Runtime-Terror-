@@ -1,4 +1,4 @@
-@using Microsoft.AspNetCore.Http
+﻿@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,14 +29,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Queries" asp-action="Landing">Queries</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
-                            </li>
                         </ul>
                     </div>
-                    <a class="btn btn-info navbar-brand pull-right" asp-controller="Login" asp-action="Logout">
-                        <span class="glyphicon glyphicon-log-out"></span> Log out
-                    </a>
+                    <button class="btn btn-outline-info navbar-brand pull-right" type="button" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
                 }
             </div>
         </nav>
