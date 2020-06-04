@@ -1,4 +1,4 @@
-﻿
+
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -32,6 +32,7 @@
                 chart: {
                     title: 'Progression of outcomes for Males',
                 },
+                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
                 bars: 'vertical',
             };
             var materialChart = new google.charts.Bar(document.getElementById('barMale'));
@@ -59,6 +60,7 @@
                 chart: {
                     title: 'Progression of outcomes for Females',
                 },
+                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
                 bars: 'vertical',
             };
             var materialChart = new google.charts.Bar(document.getElementById('barFemale'));
@@ -73,7 +75,7 @@
     <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
     <hr class="my-4" />
     <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
-    <hr class="my-4" /><br />
-    <button class="btn btn-dark" type="button" onclick="location.href='@Url.Action("Landing", "Queries")'">Return</button>
+    <hr class="my-4" />
+    <input type='button' class="btn btn-dark" onclick='history.back();' value='Return' />
 </body>
 </html> 
