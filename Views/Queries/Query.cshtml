@@ -1,4 +1,4 @@
-﻿
+
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -61,7 +61,7 @@
                     title: 'Excluded',
                 },
                 legend: { position: 'none' },
-                colors: ['#3366CC'],
+                colors: ['#DC3912'], 
             };
             var materialChart = new google.charts.Bar(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
@@ -74,7 +74,7 @@
                     title: 'Qualified',
                 },
                 legend: { position: 'none' },
-                colors: ['#109618'],
+                colors: ['#109618'], 
             };
             var materialChart = new google.charts.Bar(document.getElementById('barQualified'));
             materialChart.draw(data, materialOptions);
@@ -87,7 +87,7 @@
                     title: 'Proceed',
                 },
                 legend: { position: 'none' },
-                colors: ['#FF9900'],
+                colors: ['#3366CC'], 
             };
             var materialChart = new google.charts.Bar(document.getElementById('barProceed'));
             materialChart.draw(data, materialOptions);
@@ -101,81 +101,91 @@
                         title: 'Not Categorised',
                     },
                     legend: { position: 'none' },
-                    colors: ['#DC3912'],
+                    colors: ['#FF9900'],
 
                 };
                 var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
                 materialChart.draw(data, materialOptions);
             }
+        function goBack() {
+            document.location = 'https://localhost:5001/Queries/Landing';
+        }
 
 
     </script>
 </head>
 <body>
-    <h4>Selected Filter Attributes:</h4><br />
+    <h3>FILTERS</h3><br />
     @if (ViewBag.Prov != null)
     {
         if (ViewBag.Prov == "EC")
         {
-            <h5>PROVINCE: Eastern Cape</h5>
+            <h4>PROVINCE: Eastern Cape</h4>
         }
         else if (ViewBag.Prov == "FS")
         {
-            <h5>PROVINCE: Free State</h5>
+            <h4>PROVINCE: Free State</h4>
         }
         else if (ViewBag.Prov == "GA")
         {
-            <h5>PROVINCE: Gauteng</h5>
+            <h4>PROVINCE: Gauteng</h4>
         }
         else if (ViewBag.Prov == "KZ")
         {
-            <h5>PROVINCE: KwaZulu-Natal</h5>
+            <h4>PROVINCE: KwaZulu-Natal</h4>
         }
         else if (ViewBag.Prov == "LP")
         {
-            <h5>PROVINCE: Limpopo</h5>
+            <h4>PROVINCE: Limpopo</h4>
         }
         else if (ViewBag.Prov == "MP")
         {
-            <h5>PROVINCE: Mpumalanga</h5>
+            <h4>PROVINCE: Mpumalanga</h4>
         }
         else if (ViewBag.Prov == "NC")
         {
-            <h5>PROVINCE: Northern Cap</h5>
+            <h4>PROVINCE: Northern Cap</h4>
         }
         else if (ViewBag.Prov == "NW")
         {
-            <h5>PROVINCE: North West</h5>
+            <h4>PROVINCE: North West</h4>
         }
         else
         {
-            <h5>PROVINCE: Western Cape</h5>
+            <h4>PROVINCE: Western Cape</h4>
         }
     }
     @if (ViewBag.Gender != null)
     {
         if (ViewBag.Prov == "M")
         {
-            <h5>GENDER: Male</h5>
+            <h4>GENDER: Male</h4>
         }
         else
         {
-            <h5>GENDER: Female</h5>
+            <h4>GENDER: Female</h4>
         }
     }
     @if (ViewBag.Race != null)
     {
-        <h5>RACE: @ViewBag.Race</h5>
+        <h4>RACE: @ViewBag.Race</h4>
     }
     @if (ViewBag.Age != null)
     {
-        <h5>AGE RANGE: @ViewBag.Age</h5>
+        <h4>AGE RANGE: @ViewBag.Age</h4>
     }
     <hr class="my-4" />
     <table class="columns">
         <tr>
-            <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
-            <td><div id="barQualified" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            @if (ViewBag.Excluded != null)
+            {
+                <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            }
+            else
+            {
+                <td><div style="width: 500px; height: 500px;border: 1px solid #ccc">Hello</div></td>
+            }
+                <td><div id="barQualified" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
     <table class="columns">
@@ -184,7 +194,7 @@
             <td><div id="barNotCategorised" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
-    <hr class="my-4" /><br />
-    <button class="btn btn-dark" type="button" onclick="location.href='@Url.Action("Landing", "Queries")'">Return</button>
+    <hr class="my-4" />
+    <input type='button' class="btn btn-dark" onClick='goBack()' value='Return' />
 </body>
 </html> 
