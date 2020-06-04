@@ -58,6 +58,7 @@ namespace BID_E.Controllers
 
                 ModelState.Clear();
                 ViewBag.message = l.Username + " is successfully registered ";
+                HttpContext.Session.SetString("UserId", l.UserId.ToString());
                 return RedirectToAction("Landing", "Graphs");
             }
             return View();
@@ -74,10 +75,10 @@ namespace BID_E.Controllers
             var account = db.Login.Where(u => u.Username == user.Username && u.Password == user.Password).FirstOrDefault();
             if(account != null)
             {
-                HttpContext.Session.SetString("UserID", account.UserId.ToString());
+                HttpContext.Session.SetString("UserId", account.UserId.ToString());
                 HttpContext.Session.SetString("Username", account.Username);
                 //return View("Graphs", "Landing");
-                return RedirectToAction("Landing","Graphs");
+                return RedirectToAction("Landing", "Graphs");
             }
             else
             {
@@ -86,7 +87,18 @@ namespace BID_E.Controllers
             return View();
         }
 
-
+        public ActionResult Welcome()
+        {
+            if(HttpContext.Session.GetString("UserId") != null)
+            {
+                ViewBag.Username = HttpContext.Session.GetString("Username");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

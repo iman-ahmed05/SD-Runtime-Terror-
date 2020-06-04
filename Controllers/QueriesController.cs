@@ -16,6 +16,7 @@ using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.AspNetCore.Http;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -35,7 +36,13 @@ namespace BID_E.Controllers
         // GET: /<controller>/
         public IActionResult Landing()
         {
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                ViewBag.Username = HttpContext.Session.GetString("Username");
+                return View();
+            }
             return View();
+
         }
 
         public IActionResult Gen()
