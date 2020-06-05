@@ -13,9 +13,9 @@ namespace BID_E.Controllers
 {
     public class GraphsController : Controller
     {
-        private readonly ILogger<GraphsController> _logger;
+       private readonly ILogger<GraphsController> _logger;
 
-        public GraphsController(ILogger<GraphsController> logger)
+        public GraphsController(ILogger<GraphsController>logger)
         {
             _logger = logger;
         }
