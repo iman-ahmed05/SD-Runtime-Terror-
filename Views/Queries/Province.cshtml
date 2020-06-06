@@ -82,6 +82,10 @@
                 title: 'Students Excluded in @ViewBag.MyString',
                 legend: { position: 'none' },
                 colors: ['#DC3912'],
+                chartArea: {
+                    height: "75%",
+                    width: "75%"
+                }
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
@@ -93,6 +97,10 @@
                 title: 'Students Qualified in @ViewBag.MyString',
                 legend: { position: 'none' },
                 colors: ['#109618'],
+                chartArea: {
+                    height: "75%",
+                    width: "75%"
+                }
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barQualified'));
             materialChart.draw(data, materialOptions);
@@ -104,6 +112,10 @@
                 title: 'Students Proceed in @ViewBag.MyString',
                 legend: { position: 'none' },
                 colors: ['#3366CC'],
+                chartArea: {
+                    height: "75%",
+                    width: "75%"
+                }
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barProceed'));
             materialChart.draw(data, materialOptions);
@@ -115,6 +127,10 @@
                 title: 'Students Not Categorised in @ViewBag.MyString',
                 legend: { position: 'none' },
                 colors: ['#FF9900'],
+                chartArea: {
+                    height: "75%",
+                    width: "75%"
+                }
             };
             var materialChart = new google.visualization.LineChart(document.getElementById('barNotCategorised'));
             materialChart.draw(data, materialOptions);
@@ -127,6 +143,11 @@
                 title: 'Percentage of progression outcomes for Male students in @ViewBag.MyString',
                 pieHole: 0.3,
                 colors: ['#DC3912', '#FF9900', '#3366CC', '#109618'],
+                chartArea: {
+                    top: "22%",
+                    height: "70%",
+                    width: "70%"
+                }
 
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
@@ -140,6 +161,11 @@
                 title: 'Percentage of progression outcomes for Female students in @ViewBag.MyString',
                 pieHole: 0.3,
                 colors: ['#DC3912', '#FF9900', '#3366CC', '#109618'],
+                chartArea: {
+                    top: "22%",
+                    height: "70%",
+                    width: "70%"
+                }
 
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
@@ -149,26 +175,30 @@
     </script>
 </head>
 <body>
-    <h4>@ViewBag.MyString</h4><br />
+    <h3>PROVINCE: @ViewBag.MyString</h3>
+    <hr class="my-4" />
+    <h5>Progression outcomes</h5>
+    <br />
+
     <table class="columns">
         <tr>
-            <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
-            <td><div id="barQualified" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barExcluded" style="width: 550px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barQualified" style="width: 550px; height: 500px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
     <table class="columns">
         <tr>
-            <td><div id="barProceed" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
-            <td><div id="barNotCategorised" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barProceed" style="width: 550px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td><div id="barNotCategorised" style="width: 550px; height: 500px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
     <hr class="my-4" />
-    <h5>Progression of outcomes by Gender</h5>
+    <h5>Overall percentage of progression outcomes by Gender</h5>
     <br />
     <table class="columns">
         <tr>
-            <td><div id="piechartMale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
-            <td><div id="piechartFemale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartMale" style="width: 550px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartFemale" style="width: 550px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
     <hr class="my-4" /><br />

@@ -29,9 +29,6 @@
             ]);
 
             var materialOptions = {
-                chart: {
-                    title: 'Progression of outcomes for Males',
-                },
                 colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
                 bars: 'vertical',
             };
@@ -57,9 +54,6 @@
             ]);
 
             var materialOptions = {
-                chart: {
-                    title: 'Progression of outcomes for Females',
-                },
                 colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
                 bars: 'vertical',
             };
@@ -69,9 +63,13 @@
     </script>
 </head>
 <body>
-    <div id="barMale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
+    <h3>GENDER</h3>
     <hr class="my-4" />
-    <div id="barFemale" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div>
+    <h5>Progression outcomes for Males</h5><br />
+    <div id="barMale" style="width: 1100px; height: 500px;"></div>
+    <hr class="my-4" />
+    <h5>Progression outcomes for Females</h5><br />
+    <div id="barFemale" style="width: 1100px; height: 500px;"></div>
     <hr class="my-4" /><br />
     <button class="btn btn-dark" type="button" onclick="location.href='@Url.Action("Landing", "Queries")'">Return</button>
 </body>

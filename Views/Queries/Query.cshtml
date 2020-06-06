@@ -57,9 +57,6 @@
         function drawExcluded() {
             var data = google.visualization.arrayToDataTable(Excluded);
             var materialOptions = {
-                chart: {
-                    title: 'Excluded',
-                },
                 legend: { position: 'none' },
                 colors: ['#DC3912'],
             };
@@ -70,9 +67,6 @@
         function drawQualified() {
             var data = google.visualization.arrayToDataTable(Qualified);
             var materialOptions = {
-                chart: {
-                    title: 'Qualified',
-                },
                 legend: { position: 'none' },
                 colors: ['#109618'],
             };
@@ -83,9 +77,6 @@
         function drawProceed() {
             var data = google.visualization.arrayToDataTable(Proceed);
             var materialOptions = {
-                chart: {
-                    title: 'Proceed',
-                },
                 legend: { position: 'none' },
                 colors: ['#3366CC'],
             };
@@ -97,12 +88,8 @@
             function drawNotCategorised() {
                 var data = google.visualization.arrayToDataTable(NotCategorised);
                 var materialOptions = {
-                    chart: {
-                        title: 'Not Categorised',
-                    },
                     legend: { position: 'none' },
                     colors: ['#FF9900'],
-
                 };
                 var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
                 materialChart.draw(data, materialOptions);
@@ -174,14 +161,27 @@
     <hr class="my-4" />
     <table class="columns">
         <tr>
-            <td><div id="barExcluded" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
-            <td><div id="barQualified" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td>
+                <h5>EXCLUDED</h5>
+                <div id="barExcluded" style="width: 500px; height: 500px;"></div>
+            </td>
+            <td>
+                <h5>QUALIFIED</h5>
+                <div id="barQualified" style="width: 500px; height: 500px;"></div>
+            </td>
         </tr>
     </table>
+    <br />
     <table class="columns">
         <tr>
-            <td><div id="barProceed" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
-            <td><div id="barNotCategorised" style="width: 500px; height: 500px;border: 1px solid #ccc"></div></td>
+            <td>
+                <h5>PROCEED</h5>
+                <div id="barProceed" style="width: 500px; height: 500px;"></div>
+            </td>
+            <td>
+                <h5>NOT CATEGORISED</h5>
+                <div id="barNotCategorised" style="width: 500px; height: 500px;"></div>
+            </td>
         </tr>
     </table>
     <hr class="my-4" /><br />

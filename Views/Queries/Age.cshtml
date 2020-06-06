@@ -46,9 +46,6 @@
             var data = google.visualization.arrayToDataTable(Age);
 
             var materialOptions = {
-                chart: {
-                    title: 'Number of students Excluded',
-                },
                 bars: 'horizontal',
                 legend: { position: 'none' },
                 colors: ['#DD4477'],
@@ -85,14 +82,16 @@
     </script>
 </head>
 <body>
-    <h4>Students between age @ViewBag.MyString</h4><br />
-
-    <div id="Bar" style="width: 1000px; height: 500px;border: 1px solid #ccc"></div><br />
+    <h3>Students between age @ViewBag.MyString</h3>
+    <hr class="my-4" />
+    <h5>Number of students Excluded</h5>
     <br />
+    <div id="Bar" style="width: 1100px; height: 500px;"></div>
+    <hr class="my-4" />
     <table class="columns">
         <tr>
-            <td><div id="piechartMale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
-            <td><div id="piechartFemale" style="width: 500px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartMale" style="width: 550px; height: 300px;border: 1px solid #ccc"></div></td>
+            <td><div id="piechartFemale" style="width: 550px; height: 300px;border: 1px solid #ccc"></div></td>
         </tr>
     </table>
     <hr class="my-4" /><br />

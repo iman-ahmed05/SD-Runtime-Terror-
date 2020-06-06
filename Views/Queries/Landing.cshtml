@@ -10,7 +10,7 @@
     <p>In order to view your graphs for research questions, please select your filter options</p>
 </div>
 <hr class="my-4" />
-<h5>Select a single filter option</h5>
+<h4>Select a single filter option</h4>
 <br />
 <h5>Province</h5>
 <ul class="nav nav-pills flex-column">
@@ -65,7 +65,7 @@
 </ul>
 <hr class="my-4" />
 <div class="container-fluid">
-    <h4>Select 3/4 attribute to filter</h4><br />
+    <h4>Select 3/4 attributes to filter</h4><br />
     <div class="row">
         <div class="col-sm-6">
             <fieldset class="form-group">
@@ -214,24 +214,31 @@
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <input type='button' class="btn btn-dark" value='Submit' id='myButton' onClick='displayRadioValue()' />    </div>
-    <br>
-    <div class="row">
-        <button id="clear-button" class="btn btn-dark">Clear</button>
-    </div>
+        <table class="columns" style="border-spacing: 100px;">
+            <tr>
+                <td>
+                    <div class="row">
+                        <input type='button' class="btn btn-info" value='Submit' id='myButton' onClick='displayRadioValue()' />
+                    </div>
+                </td>
+                <td style="margin: 50px; padding: 100px;">
+                    <div class="row">
+                        <button class="btn btn-outline-dark" type="button" button id="clear-button" >Clear selection</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
 </div>
 
-<script type="text/javascript">
-    
-    function displayRadioValue() {
+
+<script type="text/javascript">function displayRadioValue() {
         var province;
         var race;
         var gender;
         var age;
         var p = false;
         var r = false;
-        var g=false;
+        var g = false;
         var a = false;
 
         var ele = document.getElementsByName('province');
@@ -273,9 +280,8 @@
     }
 
     document.getElementById('clear-button').addEventListener('click', function () {
-        ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function(id) {
-        document.getElementById(id).checked = false;
-      });
-      return false;
-    })
-</script>
+        ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function (id) {
+            document.getElementById(id).checked = false;
+        });
+        return false;
+    })</script>
