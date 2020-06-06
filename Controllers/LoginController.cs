@@ -59,7 +59,7 @@ namespace BID_E.Controllers
                 ModelState.Clear();
                 ViewBag.message = l.Username + " is successfully registered ";
                 HttpContext.Session.SetString("UserId", l.UserId.ToString());
-                return RedirectToAction("Landing", "Graphs");
+                return RedirectToAction("Welcome", "Login");
             }
             return View();
         }
@@ -78,7 +78,7 @@ namespace BID_E.Controllers
                 HttpContext.Session.SetString("UserId", account.UserId.ToString());
                 HttpContext.Session.SetString("Username", account.Username);
                 //return View("Graphs", "Landing");
-                return RedirectToAction("Landing", "Graphs");
+                return RedirectToAction("Welcome", "Login");
             }
             else
             {
