@@ -1,4 +1,4 @@
-﻿
+
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -6,6 +6,7 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
+
 
         JSONExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
         console.log(JSONExcluded);
@@ -94,8 +95,6 @@
                 var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
                 materialChart.draw(data, materialOptions);
             }
-
-
     </script>
 </head>
 <body>
@@ -162,12 +161,28 @@
     <table class="columns">
         <tr>
             <td>
-                <h5>EXCLUDED</h5>
-                <div id="barExcluded" style="width: 500px; height: 500px;"></div>
+                @if (ViewBag.Excluded.Count == 0)
+                {
+                    <h5 style="color:white;">.</h5>
+                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR EXCLUDED STUDENTS</p></div>
+                }
+                else
+                {
+                    <h5>EXCLUDED</h5>
+                    <div id="barExcluded" style="width: 550px; height: 500px;"></div>
+                }
             </td>
             <td>
-                <h5>QUALIFIED</h5>
-                <div id="barQualified" style="width: 500px; height: 500px;"></div>
+                @if (ViewBag.Qualified.Count == 0)
+                {
+                    <h5 style="color:white;">.</h5>
+                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR QUALIFIED STUDENTS</p></div>
+                }
+                else
+                {
+                    <h5>QUALIFIED</h5>
+                    <div id="barQualified" style="width: 550px; height: 500px;"></div>
+                }
             </td>
         </tr>
     </table>
@@ -175,13 +190,30 @@
     <table class="columns">
         <tr>
             <td>
-                <h5>PROCEED</h5>
-                <div id="barProceed" style="width: 500px; height: 500px;"></div>
+                @if (ViewBag.Proceed.Count == 0)
+                {
+                    <h5 style="color:white;">.</h5>
+                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR PROCEED STUDENTS</p></div>
+                }
+                else
+                {
+                    <h5>PROCEED</h5>
+                    <div id="barProceed" style="width: 550px; height: 500px;2"></div>
+                }
             </td>
             <td>
-                <h5>NOT CATEGORISED</h5>
-                <div id="barNotCategorised" style="width: 500px; height: 500px;"></div>
+                @if (ViewBag.NotCategorised.Count == 0)
+                {
+                    <h5 style="color:white;">.</h5>
+                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR NOT CATEGORISED STUDENTS</p></div>
+                }
+                else
+                {
+                    <h5>NOT CATEGORISED</h5>
+                    <div id="barNotCategorised" style="width: 550px; height: 500px;"></div>
+                }
             </td>
+
         </tr>
     </table>
     <hr class="my-4" /><br />
