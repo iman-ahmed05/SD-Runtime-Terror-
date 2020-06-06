@@ -1,14 +1,156 @@
-﻿@model BID_E.Models.Login
+﻿
+@model BID_E.Models.Login
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
 
-<h2>Welcome</h2>
-<hr class="my-4">
-@if (ViewBag.message != null)
-{
-    <div class="form-control">
-        <div class="col-md-10">@ViewBag.message</div>
+        .container {
+            position: relative;
+           
+        }
+
+        .image {
+            opacity: 1;
+            display: block;
+            width: 400px;
+            height: 400px;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+
+
+        .container:hover .image {
+            opacity: 0.3;
+        }
+
+        .container:hover .middle {
+            opacity: 1;
+        }
+
+        .text {
+            background-color: #465372;
+            color: white;
+            font-size: 16px;
+            padding: 16px 32px;
+        }
+
+        .column {
+            flex: 25%;
+            max-width: 100%;
+            padding: 0 4px;
+        }
+
+            .column img {
+                margin-top: 8px;
+                vertical-align: middle;
+            }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 4px;
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .grid-container {
+            position: relative; 
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 150px;
+            padding: 10px;
+        }
+
+       .center {
+          width:900px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <h2 style="font-weight:bold">
+        Welcome to
+        <span style='color: #1E8449'>B</span>
+        <span style='color: #F1C40F'>I</span>
+        <span style='color: #5DADE2'>D</span>
+        <span style='color: #17202A'>-</span>
+        <span style='color: #F02417'>E</span>
+    </h2>
+    <h5>Business Intelligence Dashboard for Exclusions</h5>
+    <p>Built For Researchers</p>
+    <p>This platform allows you to identify anomalies, trends and questions that may arise in the data you are presented with</p>
+
+    
+       
+        <div class="row">
+            <div class="center">
+                <div class="grid-container">
+
+
+                    <div class="column">
+
+                        <div class=" header">
+                            <h4>Graphs Page</h4>
+                            <p>General graphs that will assist with your research</p>
+                        </div>
+
+                        <a href="/Graphs/Landing" >
+                            <img src="~/lib/barchart.png" alt="Avatar" class="image" style="width:380px; height:300px">
+                            <div class="middle">
+                                <div class="text">Click here</div>
+                            </div>
+                        </a>
+                    </div>
+
+
+
+                    <div class="column">
+
+                        <div class="header">
+                            <h4>Queries Page</h4>
+                            <p>Apply filters to view data specific graphs</p>
+                        </div>
+
+                        <a href="/Queries/Landing">
+                            <img src="~/lib/rsz_querieschart.png" alt="Avatar" class="image" style="width:400px; height:320px">
+                            <div class="middle">
+                                <div class="text">Click here</div>
+                            </div>
+                        </a>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
     </div>
-}
+
+
+
+</body>
+</html>
