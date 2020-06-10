@@ -55,7 +55,7 @@ namespace BID_E.Controllers
         {
             return View();
         }
-
+        //User selects 3 or 4 attributes and the relevant data is retrieved
         public IActionResult Query(string id)
         {
             ViewBag.MyString = id;
@@ -406,6 +406,7 @@ namespace BID_E.Controllers
             return View();
         }
 
+        //Query that returns selected Age group
         public IActionResult Age(string id)
         {
             string cs = "Filename =./SD.db";
