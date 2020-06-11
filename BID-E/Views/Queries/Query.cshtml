@@ -158,65 +158,85 @@
         <h5>AGE RANGE: @ViewBag.Age</h5>
     }
     <hr class="my-4" />
-    <table class="columns">
-        <tr>
-            <td>
-                @if (ViewBag.Excluded.Count == 0)
-                {
-                    <h5 style="color:white;">.</h5>
-                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR EXCLUDED STUDENTS</p></div>
-                }
-                else
-                {
-                    <h5>EXCLUDED</h5>
-                    <div id="barExcluded" style="width: 550px; height: 500px;"></div>
-                }
-            </td>
-            <td>
-                @if (ViewBag.Qualified.Count == 0)
-                {
-                    <h5 style="color:white;">.</h5>
-                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR QUALIFIED STUDENTS</p></div>
-                }
-                else
-                {
-                    <h5>QUALIFIED</h5>
-                    <div id="barQualified" style="width: 550px; height: 500px;"></div>
-                }
-            </td>
-        </tr>
-    </table>
-    <br />
-    <table class="columns">
-        <tr>
-            <td>
-                @if (ViewBag.Proceed.Count == 0)
-                {
-                    <h5 style="color:white;">.</h5>
-                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR PROCEED STUDENTS</p></div>
-                }
-                else
-                {
-                    <h5>PROCEED</h5>
-                    <div id="barProceed" style="width: 550px; height: 500px;2"></div>
-                }
-            </td>
-            <td>
-                @if (ViewBag.NotCategorised.Count == 0)
-                {
-                    <h5 style="color:white;">.</h5>
-                    <div style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR NOT CATEGORISED STUDENTS</p></div>
-                }
-                else
-                {
-                    <h5>NOT CATEGORISED</h5>
-                    <div id="barNotCategorised" style="width: 550px; height: 500px;"></div>
-                }
-            </td>
 
-        </tr>
-    </table>
-    <hr class="my-4" /><br />
-    <button class="btn btn-dark" type="button" onclick="location.href='@Url.Action("Landing", "Queries")'">Return</button>
-</body>
+    @if (ViewBag.Excluded.Count == 0 & ViewBag.Qualified.Count == 0 & ViewBag.Proceed.Count == 0 & ViewBag.NotCategorised.Count == 0)
+    {
+        <table class="columns">
+            <tr>
+                <td>
+                    <h5 style="color:white;">.</h5>
+
+                    <div class="alert alert-dismissible alert-danger" style="width: 1100px; text-align: center; padding: 125px 0; height: 300px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">
+                        NO DATA FOR SELECTED FILTER ATTRIBUTES
+                        <br />
+                        <a href="@Url.Action("Landing", "Queries")" class="alert-link">Try a new selection</a></p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <table class="columns">
+            <tr>
+                <td>
+                    @if (ViewBag.Excluded.Count == 0)
+                    {
+                        <h5 style="color:white;">.</h5>
+                        <div class="alert alert-dismissible alert-danger" style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR EXCLUDED STUDENTS</p></div>
+                    }
+                    else
+                    {
+                        <h5>EXCLUDED</h5>
+                        <div id="barExcluded" style="width: 550px; height: 500px;"></div>
+                    }
+                </td>
+                <td>
+                    @if (ViewBag.Qualified.Count == 0)
+                    {
+                        <h5 style="color:white;">.</h5>
+                        <div class="alert alert-dismissible alert-danger" style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR QUALIFIED STUDENTS</p></div>
+                    }
+                    else
+                    {
+                        <h5>QUALIFIED</h5>
+                        <div id="barQualified" style="width: 550px; height: 500px;"></div>
+                    }
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table class="columns">
+            <tr>
+                <td>
+                    @if (ViewBag.Proceed.Count == 0)
+                    {
+                        <h5 style="color:white;">.</h5>
+                        <div class="alert alert-dismissible alert-danger" style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR PROCEED STUDENTS</p></div>
+                    }
+                    else
+                    {
+                        <h5>PROCEED</h5>
+                        <div id="barProceed" style="width: 550px; height: 500px;"></div>
+                    }
+                </td>
+                <td>
+                    @if (ViewBag.NotCategorised.Count == 0)
+                    {
+                        <h5 style="color:white;">.</h5>
+                        <div class="alert alert-dismissible alert-danger" style="width: 550px; text-align: center; padding: 230px 0; height: 500px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">NO DATA FOR NOT CATEGORISED STUDENTS</p></div>
+                    }
+                    else
+                    {
+                        <h5>NOT CATEGORISED</h5>
+                        <div id="barNotCategorised" style="width: 550px; height: 500px;"></div>
+                    }
+                </td>
+
+            </tr>
+        </table>
+    }
+        <hr class="my-4" /><br />
+        <button class="btn btn-dark" type="button" onclick="location.href='@Url.Action("Landing", "Queries")'">Return</button>
+    </body>
 </html> 

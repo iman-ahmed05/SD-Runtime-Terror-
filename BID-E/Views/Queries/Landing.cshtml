@@ -4,276 +4,311 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Research Page</h4>
-<hr class="my-4" />
-<div>
-    <p>In order to view your graphs for research questions, please select your filter options</p>
-</div>
-<hr class="my-4" />
-<h4>Select a single filter option</h4>
-<br />
-<h5>Province</h5>
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Province</a>
-        <div class="dropdown-menu" style="">
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="EC">Eastern Cape</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="FS">Free State</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="GA">Gauteng</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="KZ">KZN</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="LP">Limpopo</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="MP">Mpumalanga</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="NC">Northern Cape</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="NW">North West</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="WC">Western Cape</a>
-        </div>
-</ul>
-<br />
-<h5>Race</h5>
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Race</a>
-        <div class="dropdown-menu" style="">
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Black">Black</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Coloured">Coloured</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Indian">Indian</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="White">White</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Chinese">Chinese</a>
-        </div>
-</ul>
-<br />
-<h5>Gender</h5>
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gender</a>
-        <div class="dropdown-menu" style="">
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Gender">ALL</a>
-        </div>
-</ul>
-<br />
-<h5>Age</h5>
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Age</a>
-        <div class="dropdown-menu" style="">
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="16 AND 20">16-20</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="21 AND 30">21-30</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="31 AND 40">31-40</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="41 AND 50">41-50</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="51 AND 60">51-60</a>
-        </div>
-</ul>
-<hr class="my-4" />
-<div class="container-fluid">
-    <h4>Select 3/4 attributes to filter</h4><br />
-    <div class="row">
-        <div class="col-sm-6">
-            <fieldset class="form-group">
-                <h5>Province</h5>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rEC" value="EC">
-                        Eastern Cape
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rFS" value="FS">
-                        Free State
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rGA" value="GA">
-                        Gauteng
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rKZ" value="KZ">
-                        KwaZulu-Natal
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rLP" value="LP">
-                        Limpopo
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rMP" value="MP">
-                        Mpumalanga
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rNC" value="NC">
-                        Northern Cape
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rNW" value="NW">
-                        North West
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="province" id="rWC" value="WC">
-                        Western Cape
-                    </label>
-                </div>
-            </fieldset>
-        </div>
-        <div class="col-sm-6">
-            <fieldset class="form-group">
-                <h5>Race</h5>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="race" id="rBlack" value="Black">
-                        Black
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="race" id="rChinese" value="Chinese">
-                        Chinese
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="race" id="rColoured" value="Coloured">
-                        Coloured
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="race" id="rIndian" value="Indian">
-                        Indian
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="race" id="rWhite" value="White">
-                        White
-                    </label>
-                </div>
-            </fieldset>
-        </div>
-        <div class="col-sm-6">
-            <fieldset class="form-group">
-                <h5>Age</h5>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="age" id="r16" value="16 AND 20">
-                        16-20
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="age" id="r20" value="21 AND 30">
-                        21-30
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="age" id="r30" value="31 AND 40">
-                        31-40
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="age" id="r40" value="41 AND 50">
-                        41-50
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="age" id="r50" value="51 AND 60">
-                        51-60
-                    </label>
-                </div>
-            </fieldset>
-        </div>
-        <div class="col-sm-6">
-            <fieldset class="form-group">
-                <h5>Gender</h5>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="gender" id="rMale" value="M">
-                        Male
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="gender" id="rFemale" value="F">
-                        Female
-                    </label>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    <div class="row">
-        <div class="column"><input type='button' style="margin:5px;" class="btn btn-info" value='Submit' id='myButton' onClick='displayRadioValue()' /></div>
-        <div class="column"><button class="btn btn-outline-dark" type="button" style="margin:5px;" button id="clear-button">Clear selection</button></div>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: separate;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body scroll="no" style="overflow: hidden">
+    <h4>Research Page</h4>
+    <hr class="my-4" />
+    <div>
+        <p>In order to view your graphs for research questions, please select your filter options</p>
     </div>
     <hr class="my-4" />
+    <h4>Select a single filter option</h4>
+    <br />
+    <table>
+        <tr>
+            <td>
+                <div>
+                    <h5>Province</h5>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Province</a>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="EC">Eastern Cape</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="FS">Free State</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="GA">Gauteng</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="KZ">KZN</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="LP">Limpopo</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="MP">Mpumalanga</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="NC">Northern Cape</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="NW">North West</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Province" asp-route-id="WC">Western Cape</a>
+                            </div>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <h5>Race</h5>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Race</a>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Black">Black</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Coloured">Coloured</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Indian">Indian</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="White">White</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Race" asp-route-id="Chinese">Chinese</a>
+                            </div>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <h5>Gender</h5>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gender</a>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Gender">ALL</a>
+                            </div>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <h5>Age</h5>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Age</a>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="16 AND 20">16-20</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="21 AND 30">21-30</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="31 AND 40">31-40</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="41 AND 50">41-50</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Queries" asp-action="Age" asp-route-id="51 AND 60">51-60</a>
+                            </div>
+                    </ul>
+                </div>
+            </td>
 
-</div>
+        </tr>
+    </table>
+
+    <hr class="my-4" />
+    <h4>Select 3/4 attributes to filter</h4>
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <h5>Province</h5>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rEC" value="EC">
+                            Eastern Cape
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rFS" value="FS">
+                            Free State
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rGA" value="GA">
+                            Gauteng
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rKZ" value="KZ">
+                            KwaZulu-Natal
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rLP" value="LP">
+                            Limpopo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rMP" value="MP">
+                            Mpumalanga
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rNC" value="NC">
+                            Northern Cape
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rNW" value="NW">
+                            North West
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="province" id="rWC" value="WC">
+                            Western Cape
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <h5>Race</h5>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="race" id="rBlack" value="Black">
+                            Black
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="race" id="rChinese" value="Chinese">
+                            Chinese
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="race" id="rColoured" value="Coloured">
+                            Coloured
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="race" id="rIndian" value="Indian">
+                            Indian
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="race" id="rWhite" value="White">
+                            White
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <h5>Age</h5>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="age" id="r16" value="16 AND 20">
+                            16-20
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="age" id="r20" value="21 AND 30">
+                            21-30
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="age" id="r30" value="31 AND 40">
+                            31-40
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="age" id="r40" value="41 AND 50">
+                            41-50
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="age" id="r50" value="51 AND 60">
+                            51-60
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <h5>Gender</h5>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="gender" id="rMale" value="M">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="gender" id="rFemale" value="F">
+                            Female
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column"><input type='button' style="margin:5px;" class="btn btn-info" value='Submit' id='myButton' onClick='displayRadioValue()' /></div>
+            <div class="column"><button class="btn btn-outline-dark" type="button" style="margin:5px;" button id="clear-button">Clear selection</button></div>
+        </div>
+        <hr class="my-4" />
+
+    </div>
 
 
-<script type="text/javascript">function displayRadioValue() {
-        var province;
-        var race;
-        var gender;
-        var age;
-        var p = false;
-        var r = false;
-        var g = false;
-        var a = false;
+    <script type="text/javascript">function displayRadioValue() {
+            var province;
+            var race;
+            var gender;
+            var age;
+            var p = false;
+            var r = false;
+            var g = false;
+            var a = false;
 
-        var ele = document.getElementsByName('province');
-        for (i = 0; i < ele.length; i++) {
-            if (ele[i].checked) {
-                province = ele[i].value;
-                p = true;
+            var ele = document.getElementsByName('province');
+            for (i = 0; i < ele.length; i++) {
+                if (ele[i].checked) {
+                    province = ele[i].value;
+                    p = true;
+                }
+            }
+            var ele1 = document.getElementsByName('race');
+            for (i = 0; i < ele1.length; i++) {
+                if (ele1[i].checked) {
+                    race = ele1[i].value;
+                    r = true;
+                }
+            }
+            var ele2 = document.getElementsByName('gender');
+            for (i = 0; i < ele2.length; i++) {
+                if (ele2[i].checked) {
+                    gender = ele2[i].value;
+                    g = true;
+                }
+            }
+
+            var ele3 = document.getElementsByName('age');
+            for (i = 0; i < ele3.length; i++) {
+                if (ele3[i].checked) {
+                    age = ele3[i].value;
+                    a = true;
+                }
+            }
+
+            if ((p & r & g & a) | (p & r & a) | (p & r & g) | (r & g & a) | (p & g & a)) {
+                var id = province + "," + gender + "," + age + "," + race;
+                document.location = 'Query/' + id;
+            } else {
+                alert("Please select 3 or more filters");
             }
         }
-        var ele1 = document.getElementsByName('race');
-        for (i = 0; i < ele1.length; i++) {
-            if (ele1[i].checked) {
-                race = ele1[i].value;
-                r = true;
-            }
-        }
-        var ele2 = document.getElementsByName('gender');
-        for (i = 0; i < ele2.length; i++) {
-            if (ele2[i].checked) {
-                gender = ele2[i].value;
-                g = true;
-            }
-        }
 
-        var ele3 = document.getElementsByName('age');
-        for (i = 0; i < ele3.length; i++) {
-            if (ele3[i].checked) {
-                age = ele3[i].value;
-                a = true;
-            }
-        }
+        document.getElementById('clear-button').addEventListener('click', function () {
+            ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function (id) {
+                document.getElementById(id).checked = false;
+            });
+            return false;
+        })
+    </script>
+</body>
+</html>
 
-        if ((p & r & g & a) | (p & r & a) | (p & r & g) | (r & g & a) | (p & g & a)) {
-            var id = province + "," + gender + "," + age + "," + race;
-            document.location = 'Query/' + id;
-        } else {
-            alert("Please select 3 or more filters");
-        }
-    }
-
-    document.getElementById('clear-button').addEventListener('click', function () {
-        ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function (id) {
-            document.getElementById(id).checked = false;
-        });
-        return false;
-    })</script>
