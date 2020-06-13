@@ -28,21 +28,6 @@ namespace BID_E.Controllers
             return View();
         }
 
-        /*private readonly ILogger<LoginController> _logger;
-
-        public LoginController(ILogger<LoginController> logger)
-        {
-            _logger = logger;
-        }*/
-
-
-       /* public IActionResult Login()
-        {
-            return View();
-        }*/
-
-        
-
         public ActionResult Register()
         {
             return View();
@@ -77,7 +62,6 @@ namespace BID_E.Controllers
             {
                 HttpContext.Session.SetString("UserId", account.UserId.ToString());
                 HttpContext.Session.SetString("Username", account.Username);
-                //return View("Graphs", "Landing");
                 return RedirectToAction("Welcome", "Login");
             }
             else
@@ -110,6 +94,11 @@ namespace BID_E.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public ActionResult WelcomeLoading()
+        {
+            return View();
         }
     }
 }
