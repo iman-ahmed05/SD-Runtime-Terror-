@@ -28,7 +28,7 @@ namespace BID_E
         {
             services.AddSession(options =>
             {
-                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+              
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -65,7 +65,7 @@ namespace BID_E
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Login}/{id?}");
+                    pattern: "{controller=Login}/{action=WelcomeLoading}/{id?}");
             });
         }
     }
