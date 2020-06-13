@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using Microsoft.Data.Sqlite;
 using System.Configuration;
-
 using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -42,22 +41,12 @@ namespace BID_E.Controllers
                 return View();
             }
             return View();
-
         }
 
-        public IActionResult Gen()
-        {
-            ViewBag.General = db.General.ToList();
-            return View();
-        }
-
-        public IActionResult Gender()
-        {
-            return View();
-        }
         //User selects 3 or 4 attributes and the relevant data is retrieved
         public IActionResult Query(string id)
         {
+            //If all 4 filters are selected
             ViewBag.MyString = id;
             if ((id.Contains("EC")| id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
                 (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M,") | id.Contains(",F,") ))
@@ -70,15 +59,19 @@ namespace BID_E.Controllers
                 ViewBag.Gender = gender;
                 ViewBag.Age = age;
                 ViewBag.Race = race;
- 
+
+                //Connection to Database
                 string cs = "Filename =./SD.db";
                 SqliteConnection conn = new SqliteConnection(cs);
                 SqliteCommand cmd;
+
+                //Create lists to store data from each query
                 List<LookupProv> groupExcluded = new List<LookupProv>();
                 List<LookupProv> groupQualified = new List<LookupProv>();
                 List<LookupProv> groupProceed = new List<LookupProv>();
                 List<LookupProv> groupNotCategorised = new List<LookupProv>();
 
+                //SQL Query Strings
                 String Excluded = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Excluded' GROUP BY REG_END ORDER BY REG_END";
                 String Qualified = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Qualified' GROUP BY REG_END ORDER BY REG_END";
                 String Proceed = "SELECT REG_END, COUNT(*)  FROM GENERAL WHERE HOME_PROVINCE = '" + prov + "' AND GENDER = '" + gender + "' AND RACE = '" + race + "' AND END_AGE BETWEEN " + age + "  AND YOS3_OUT = 'Proceed' GROUP BY REG_END ORDER BY REG_END";
@@ -86,15 +79,18 @@ namespace BID_E.Controllers
                 conn.Open();
                 if ((conn.State & System.Data.ConnectionState.Open) > 0)
                 {
+                    //Execution of query
                     cmd = new SqliteCommand(Excluded, conn);
                     SqliteDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
+                        //Results from query added to List
                         LookupProv obj = new LookupProv();
                         obj.reg_End = reader.GetValue(0).ToString();
                         obj.count = reader.GetInt32(1);
                         groupExcluded.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Qualified, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -104,6 +100,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupQualified.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Proceed, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -113,6 +110,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupProceed.Add(obj);
                     }
+
                     cmd = new SqliteCommand(NotCategorised, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -124,12 +122,15 @@ namespace BID_E.Controllers
                     }
                 }
                 conn.Close();
+
+                //Data from lists added to ViewBag to be passed to View
                 ViewBag.Excluded = groupExcluded;
                 ViewBag.Qualified = groupQualified;
                 ViewBag.Proceed = groupProceed;
                 ViewBag.NotCategorised = groupNotCategorised;
 
             }
+            //If Province, Race and Gender filters are selected
             else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
                 (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") == false & (id.Contains(",M") | id.Contains(",F")))
             {
@@ -164,6 +165,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupExcluded.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Qualified, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -173,6 +175,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupQualified.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Proceed, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -182,6 +185,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupProceed.Add(obj);
                     }
+
                     cmd = new SqliteCommand(NotCategorised, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -198,6 +202,7 @@ namespace BID_E.Controllers
                 ViewBag.Proceed = groupProceed;
                 ViewBag.NotCategorised = groupNotCategorised;
             }
+            //If Race, Age and Gender filters are selected
             else if ((id.Contains("EC") == false | id.Contains("FS") == false | id.Contains("GA") == false | id.Contains("LP") == false | id.Contains("MP") == false | id.Contains("NW") == false | id.Contains("NC") == false | id.Contains("WC") == false | id.Contains("KZ") == false) &
                (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M") | id.Contains(",F")))
             {
@@ -232,6 +237,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupExcluded.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Qualified, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -241,6 +247,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupQualified.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Proceed, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -250,6 +257,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupProceed.Add(obj);
                     }
+
                     cmd = new SqliteCommand(NotCategorised, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -266,6 +274,7 @@ namespace BID_E.Controllers
                 ViewBag.Proceed = groupProceed;
                 ViewBag.NotCategorised = groupNotCategorised;
             }
+            //If Province, Age and Gender filters are selected
             else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
                 (id.Contains("Black") == false | id.Contains("Coloured") == false | id.Contains("Chinese") == false | id.Contains("Indian") == false | id.Contains("White") == false) & id.Contains("AND") & (id.Contains(",M") | id.Contains(",F")))
             {
@@ -300,6 +309,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupExcluded.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Qualified, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -309,6 +319,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupQualified.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Proceed, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -318,6 +329,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupProceed.Add(obj);
                     }
+
                     cmd = new SqliteCommand(NotCategorised, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -334,6 +346,7 @@ namespace BID_E.Controllers
                 ViewBag.Proceed = groupProceed;
                 ViewBag.NotCategorised = groupNotCategorised;
             }
+            //If Province, Race and Age filters are selected
             else if ((id.Contains("EC") | id.Contains("FS") | id.Contains("GA") | id.Contains("LP") | id.Contains("MP") | id.Contains("NW") | id.Contains("NC") | id.Contains("WC") | id.Contains("KZ")) &
                (id.Contains("Black") | id.Contains("Coloured") | id.Contains("Chinese") | id.Contains("Indian") | id.Contains("White")) & id.Contains("AND") & (id.Contains(",M,") == false | id.Contains(",F,") == false))
 
@@ -369,6 +382,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupExcluded.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Qualified, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -378,6 +392,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupQualified.Add(obj);
                     }
+
                     cmd = new SqliteCommand(Proceed, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -387,6 +402,7 @@ namespace BID_E.Controllers
                         obj.count = reader.GetInt32(1);
                         groupProceed.Add(obj);
                     }
+
                     cmd = new SqliteCommand(NotCategorised, conn);
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -464,6 +480,7 @@ namespace BID_E.Controllers
 
         }
 
+        //Query that returns selected Province
         public IActionResult Province(string id)
         {
             string cs = "Filename =./SD.db";
@@ -533,6 +550,7 @@ namespace BID_E.Controllers
                     obj.count = reader.GetInt32(1);
                     groupExcluded.Add(obj);
                 }
+
                 cmd = new SqliteCommand(Qualified, conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -542,6 +560,7 @@ namespace BID_E.Controllers
                     obj.count = reader.GetInt32(1);
                     groupQualified.Add(obj);
                 }
+
                 cmd = new SqliteCommand(Proceed, conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -551,6 +570,7 @@ namespace BID_E.Controllers
                     obj.count = reader.GetInt32(1);
                     groupProceed.Add(obj);
                 }
+
                 cmd = new SqliteCommand(NotCategorised, conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -589,9 +609,9 @@ namespace BID_E.Controllers
             ViewBag.Male = groupMale;
             ViewBag.Female = groupFemale;
             return View();
-
         }
 
+        //Query that returns selected Race
         public IActionResult Race(string id)
         {
             string cs = "Filename =./SD.db";
@@ -606,7 +626,6 @@ namespace BID_E.Controllers
             string race = id;
             ViewBag.MyString = id;
 
-            conn.Close();
             string Race = "SELECT YOS3_OUT, COUNT(*) FROM GENERAL WHERE RACE='" + race + "' GROUP BY YOS3_OUT";
             string Excluded = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Excluded' GROUP BY RACE";
             string Proceed = "SELECT RACE, COUNT(*)  FROM GENERAL WHERE YOS3_OUT = 'Proceed' GROUP BY RACE";
@@ -673,58 +692,11 @@ namespace BID_E.Controllers
             ViewBag.Qualified = groupQualified;
             ViewBag.NA = groupNA;
             return View();
-
         }
 
-        public IActionResult Years()
+        //Query that returns selected Gender
+        public IActionResult Gender()
         {
-            string cs = "Filename =./SD.db";
-            SqliteConnection conn = new SqliteConnection(cs);
-            SqliteCommand cmd;
-            List<LookupYears> groupGen = new List<LookupYears>();
-            List<LookupYears> groupMale = new List<LookupYears>();
-            List<LookupYears> groupFemale = new List<LookupYears>();
-
-            string Gen_Years = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL GROUP BY YEARS_IN_SYSTEM";
-            string Male = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL WHERE GENDER='M'  GROUP BY YEARS_IN_SYSTEM";
-            string Female = "SELECT YEARS_IN_SYSTEM, COUNT(*)  FROM GENERAL WHERE GENDER='F' GROUP BY YEARS_IN_SYSTEM";
-
-            conn.Open();
-            if ((conn.State & System.Data.ConnectionState.Open) > 0)
-            {
-                cmd = new SqliteCommand(Gen_Years, conn);
-                SqliteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupYears obj = new LookupYears();
-                    obj.Years_In_System = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupGen.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Male, conn);
-                while (reader.Read())
-                {
-                    LookupYears obj = new LookupYears();
-                    obj.Years_In_System = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupMale.Add(obj);
-                }
-
-                cmd = new SqliteCommand(Female, conn);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    LookupYears obj = new LookupYears();
-                    obj.Years_In_System = reader.GetValue(0).ToString();
-                    obj.count = reader.GetInt32(1);
-                    groupFemale.Add(obj);
-                }
-            }
-            conn.Close();
-            ViewBag.Male = groupMale;
-            ViewBag.Female = groupFemale;
-            ViewBag.GenYears = groupGen;
             return View();
         }
 

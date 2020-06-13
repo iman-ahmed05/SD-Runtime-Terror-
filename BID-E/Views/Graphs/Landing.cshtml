@@ -9,129 +9,9 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
-       
 
-        google.charts.setOnLoadCallback(drawMale);
-        google.charts.setOnLoadCallback(drawFemale);
-
-        function drawMale() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
-                ['2008', 113, 33, 0, 31, ''],
-                ['2009', 198, 34, 0, 41, ''],
-                ['2010', 196, 30, 107, 45, ''],
-                ['2011', 238, 41, 113, 50, ''],
-                ['2012', 244, 50, 129, 33, ''],
-                ['2013', 268, 69, 155, 37, ''],
-                ['2014', 274, 86, 174, 26, ''],
-                ['2015', 230, 61, 203, 27, ''],
-                ['2016', 358, 70, 244, 48, ''],
-                ['2017', 293, 34, 276, 113, ''],
-                ['2018', 1024, 659, 599, 406, '']
-
-            ]);
-
-            var materialOptions = {
-                bars: 'vertical',
-                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
-
-            };
-            var materialChart = new google.charts.Bar(document.getElementById('barMale'));
-            materialChart.draw(data, materialOptions);
-        }
-
-        function drawFemale() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
-                ['2008', 90, 26, 0, 17, ''],
-                ['2009', 172, 40, 0, 43, ''],
-                ['2010', 149, 42, 141, 43, ''],
-                ['2011', 180, 59, 161, 44, ''],
-                ['2012', 173, 38, 176, 30, ''],
-                ['2013', 212, 35, 61, 223, ''],
-                ['2014', 196, 71, 56, 240, ''],
-                ['2015', 152, 45, 53, 240, ''],
-                ['2016', 206, 51, 71, 310, ''],
-                ['2017', 200, 28, 79, 313, ''],
-                ['2018', 770, 646, 660, 403, '']
-
-            ]);
-
-            var materialOptions = {
-                bars: 'vertical',
-                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
-
-            };
-
-            var materialChart = new google.charts.Bar(document.getElementById('barFemale'));
-            materialChart.draw(data, materialOptions);
-        }
-
-        google.charts.setOnLoadCallback(drawBar);
-        function drawBar() {
-            var data = google.visualization.arrayToDataTable([
-                ['Age', 'Male', 'Female', { role: 'annotation' }],
-                ['5', 1, 0, ''],
-                ['16', 4, 1, ''],
-                ['17', 11, 12, ''],
-                ['18', 263, 342,''],
-                ['19', 1255, 1271, ''],
-                ['20', 770, 681, ''],
-                ['21', 565, 509, ''],
-                ['22', 512, 430,''],
-                ['23', 484, 468, ''],
-                ['24', 472, 486, ''],
-                ['25', 452, 435,'']
-
-            ]);
-
-            var materialOptions = {
-                chart: {
-                    title: 'Categorised by Male & Female for Ages 5 to 25',
-                },
-                colors: ['#1b9e77', '#7570b3'],
-
-
-                bars: 'vertical',
-            };
-            var materialChart = new google.charts.Bar(document.getElementById('age'));
-            materialChart.draw(data, materialOptions);
-        }
-
-        google.charts.setOnLoadCallback(drawReg);
-        function drawReg() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Number of Registrations'],
-                ['2008', 1953],
-                ['2009', 1044],
-                ['2010', 1089],
-                ['2011', 1112],
-                ['2012', 1067],
-                ['2013', 1193],
-                ['2014', 1152],
-                ['2015', 1307],
-                ['2016', 1480],
-                ['2017', 1388],
-                ['2018', 1541]
-            ]);
-
-
-            var options = {
-                chart: {
-                    title: '',
-                    subtitle: '',
-                },
-                bars: 'vertical',
-                colors: ['#0099C6'],
-                legend: { position: 'none' },
-            };
-
-            var chart = new google.charts.Bar(document.getElementById('barchart_reg'));
-
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-
-                JSONgroup2008 = '@Html.Raw(Json.Serialize(ViewBag.year08))';
+        //Read data from ViewBag into array
+        JSONgroup2008 = '@Html.Raw(Json.Serialize(ViewBag.year08))';
         console.log(JSONgroup2008);
         var out08 = [];
         out08.push(['Outcome', 'Number']);
@@ -153,7 +33,7 @@
             out09.push(arrgroup2009);
         });
 
-          JSONgroup2010 = '@Html.Raw(Json.Serialize(ViewBag.year10))';
+        JSONgroup2010 = '@Html.Raw(Json.Serialize(ViewBag.year10))';
         console.log(JSONgroup2010);
         var out10 = [];
         out10.push(['Outcome', 'Number']);
@@ -164,7 +44,7 @@
             out10.push(arrgroup2010);
         });
 
-          JSONgroup2011 = '@Html.Raw(Json.Serialize(ViewBag.year11))';
+        JSONgroup2011 = '@Html.Raw(Json.Serialize(ViewBag.year11))';
         console.log(JSONgroup2011);
         var out11 = [];
         out11.push(['Outcome', 'Number']);
@@ -175,7 +55,7 @@
             out11.push(arrgroup2011);
         });
 
-            JSONgroup2012 = '@Html.Raw(Json.Serialize(ViewBag.year12))';
+        JSONgroup2012 = '@Html.Raw(Json.Serialize(ViewBag.year12))';
         console.log(JSONgroup2012);
         var out12 = [];
         out12.push(['Outcome', 'Number']);
@@ -186,7 +66,7 @@
             out12.push(arrgroup2012);
         });
 
-            JSONgroup2013 = '@Html.Raw(Json.Serialize(ViewBag.year13))';
+        JSONgroup2013 = '@Html.Raw(Json.Serialize(ViewBag.year13))';
         console.log(JSONgroup2013);
         var out13 = [];
         out13.push(['Outcome', 'Number']);
@@ -197,7 +77,7 @@
             out13.push(arrgroup2013);
         });
 
-            JSONgroup2014 = '@Html.Raw(Json.Serialize(ViewBag.year14))';
+        JSONgroup2014 = '@Html.Raw(Json.Serialize(ViewBag.year14))';
         console.log(JSONgroup2014);
         var out14 = [];
         out14.push(['Outcome', 'Number']);
@@ -208,7 +88,7 @@
            out14.push(arrgroup2014);
         });
 
-            JSONgroup2015 = '@Html.Raw(Json.Serialize(ViewBag.year15))';
+        JSONgroup2015 = '@Html.Raw(Json.Serialize(ViewBag.year15))';
         console.log(JSONgroup2015);
         var out15 = [];
         out15.push(['Outcome', 'Number']);
@@ -219,7 +99,7 @@
             out15.push(arrgroup2015);
         });
 
-            JSONgroup2016 = '@Html.Raw(Json.Serialize(ViewBag.year16))';
+        JSONgroup2016 = '@Html.Raw(Json.Serialize(ViewBag.year16))';
         console.log(JSONgroup2016);
         var out16 = [];
         out16.push(['Outcome', 'Number']);
@@ -230,7 +110,7 @@
             out16.push(arrgroup2016);
         });
 
-            JSONgroup2017 = '@Html.Raw(Json.Serialize(ViewBag.year17))';
+        JSONgroup2017 = '@Html.Raw(Json.Serialize(ViewBag.year17))';
         console.log(JSONgroup2017);
         var out17 = [];
         out17.push(['Outcome', 'Number']);
@@ -241,7 +121,7 @@
             out17.push(arrgroup2017);
         });
 
-            JSONgroup2018 = '@Html.Raw(Json.Serialize(ViewBag.year18))';
+        JSONgroup2018 = '@Html.Raw(Json.Serialize(ViewBag.year18))';
         console.log(JSONgroup2018);
         var out18 = [];
         out18.push(['Outcome', 'Number']);
@@ -254,18 +134,37 @@
 
         console.log();
 
-        google.charts.setOnLoadCallback(drawgroup2008);
-        google.charts.setOnLoadCallback(drawgroup2009);
-        google.charts.setOnLoadCallback(drawgroup2010);
-        google.charts.setOnLoadCallback(drawgroup2011);
-        google.charts.setOnLoadCallback(drawgroup2012);
-        google.charts.setOnLoadCallback(drawgroup2013);
-        google.charts.setOnLoadCallback(drawgroup2014);
-        google.charts.setOnLoadCallback(drawgroup2015);
-        google.charts.setOnLoadCallback(drawgroup2016);
-        google.charts.setOnLoadCallback(drawgroup2017);
-        google.charts.setOnLoadCallback(drawgroup2018);
+        //Draw Google chart
+        google.charts.setOnLoadCallback(drawReg);
+        function drawReg() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Number of Registrations'],
+                ['2008', 1953],
+                ['2009', 1044],
+                ['2010', 1089],
+                ['2011', 1112],
+                ['2012', 1067],
+                ['2013', 1193],
+                ['2014', 1152],
+                ['2015', 1307],
+                ['2016', 1480],
+                ['2017', 1388],
+                ['2018', 1541]
+            ]);
+            var options = {
+                chart: {
+                    title: '',
+                    subtitle: '',
+                },
+                bars: 'vertical',
+                colors: ['#0099C6'],
+                legend: { position: 'none' },
+            };
+            var chart = new google.charts.Bar(document.getElementById('barchart_reg'));
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
 
+        google.charts.setOnLoadCallback(drawgroup2008);
         function drawgroup2008() {
             var data = google.visualization.arrayToDataTable(out08);
             var options = {
@@ -282,6 +181,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2009);
         function drawgroup2009() {
             var data = google.visualization.arrayToDataTable(out09);
             var options = {
@@ -298,6 +198,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2010);
         function drawgroup2010() {
             var data = google.visualization.arrayToDataTable(out10);
             var options = {
@@ -314,6 +215,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2011);
         function drawgroup2011() {
             var data = google.visualization.arrayToDataTable(out11);
             var options = {
@@ -330,6 +232,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2012);
         function drawgroup2012() {
             var data = google.visualization.arrayToDataTable(out12);
             var options = {
@@ -346,6 +249,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2013);
         function drawgroup2013() {
             var data = google.visualization.arrayToDataTable(out13);
             var options = {
@@ -362,6 +266,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2014);
         function drawgroup2014() {
             var data = google.visualization.arrayToDataTable(out14);
             var options = {
@@ -378,6 +283,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2015);
         function drawgroup2015() {
             var data = google.visualization.arrayToDataTable(out15);
             var options = {
@@ -394,6 +300,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2016);
         function drawgroup2016() {
             var data = google.visualization.arrayToDataTable(out16);
             var options = {
@@ -410,6 +317,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2017);
         function drawgroup2017() {
             var data = google.visualization.arrayToDataTable(out17);
             var options = {
@@ -426,6 +334,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawgroup2018);
         function drawgroup2018() {
             var data = google.visualization.arrayToDataTable(out18);
             var options = {
@@ -443,14 +352,84 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawMale);
+        function drawMale() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 113, 33, 0, 31, ''],
+                ['2009', 198, 34, 0, 41, ''],
+                ['2010', 196, 30, 107, 45, ''],
+                ['2011', 238, 41, 113, 50, ''],
+                ['2012', 244, 50, 129, 33, ''],
+                ['2013', 268, 69, 155, 37, ''],
+                ['2014', 274, 86, 174, 26, ''],
+                ['2015', 230, 61, 203, 27, ''],
+                ['2016', 358, 70, 244, 48, ''],
+                ['2017', 293, 34, 276, 113, ''],
+                ['2018', 1024, 659, 599, 406, '']
+            ]);
+            var materialOptions = {
+                bars: 'vertical',
+                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barMale'));
+            materialChart.draw(data, materialOptions);
+        }
 
+        google.charts.setOnLoadCallback(drawFemale);
+        function drawFemale() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Excluded', 'Proceed', 'Qualified', 'Not Categorised', { role: 'annotation' }],
+                ['2008', 90, 26, 0, 17, ''],
+                ['2009', 172, 40, 0, 43, ''],
+                ['2010', 149, 42, 141, 43, ''],
+                ['2011', 180, 59, 161, 44, ''],
+                ['2012', 173, 38, 176, 30, ''],
+                ['2013', 212, 35, 61, 223, ''],
+                ['2014', 196, 71, 56, 240, ''],
+                ['2015', 152, 45, 53, 240, ''],
+                ['2016', 206, 51, 71, 310, ''],
+                ['2017', 200, 28, 79, 313, ''],
+                ['2018', 770, 646, 660, 403, '']
+            ]);
+            var materialOptions = {
+                bars: 'vertical',
+                colors: ['#DC3912', '#3366CC', '#109618', '#FF9900'],
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barFemale'));
+            materialChart.draw(data, materialOptions);
+        }
 
-
-
+        google.charts.setOnLoadCallback(drawBar);
+        function drawBar() {
+            var data = google.visualization.arrayToDataTable([
+                ['Age', 'Male', 'Female', { role: 'annotation' }],
+                ['5', 1, 0, ''],
+                ['16', 4, 1, ''],
+                ['17', 11, 12, ''],
+                ['18', 263, 342,''],
+                ['19', 1255, 1271, ''],
+                ['20', 770, 681, ''],
+                ['21', 565, 509, ''],
+                ['22', 512, 430,''],
+                ['23', 484, 468, ''],
+                ['24', 472, 486, ''],
+                ['25', 452, 435,'']
+            ]);
+            var materialOptions = {
+                chart: {
+                    title: 'Categorised by Male & Female for Ages 5 to 25',
+                },
+                colors: ['#1b9e77', '#7570b3'],
+                bars: 'vertical',
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('age'));
+            materialChart.draw(data, materialOptions);
+        }
     </script>
 </head>
 <body>
-    <h4>General Queries For Research</h4>
+    <h3>General Queries For Research</h3>
     <hr class="my-4" />
     <div>
         <p>Below you will find general graphs that will assist with your research</p>

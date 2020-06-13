@@ -15,7 +15,7 @@
 </head>
 
 <body scroll="no" style="overflow: hidden">
-    <h4>Research Page</h4>
+    <h3>Research Page</h3>
     <hr class="my-4" />
     <div>
         <p>In order to view your graphs for research questions, please select your filter options</p>
@@ -264,6 +264,7 @@
             var g = false;
             var a = false;
 
+            //Determine which Province filter is selected
             var ele = document.getElementsByName('province');
             for (i = 0; i < ele.length; i++) {
                 if (ele[i].checked) {
@@ -271,6 +272,8 @@
                     p = true;
                 }
             }
+
+            //Determine which Race filter is selected
             var ele1 = document.getElementsByName('race');
             for (i = 0; i < ele1.length; i++) {
                 if (ele1[i].checked) {
@@ -278,6 +281,8 @@
                     r = true;
                 }
             }
+
+            //Determine which Gender filter is selected
             var ele2 = document.getElementsByName('gender');
             for (i = 0; i < ele2.length; i++) {
                 if (ele2[i].checked) {
@@ -286,6 +291,7 @@
                 }
             }
 
+            //Determine which Age filter is selected
             var ele3 = document.getElementsByName('age');
             for (i = 0; i < ele3.length; i++) {
                 if (ele3[i].checked) {
@@ -294,6 +300,7 @@
                 }
             }
 
+            //Verify that 3 or more filters selected
             if ((p & r & g & a) | (p & r & a) | (p & r & g) | (r & g & a) | (p & g & a)) {
                 var id = province + "," + gender + "," + age + "," + race;
                 document.location = 'Query/' + id;
@@ -302,6 +309,7 @@
             }
         }
 
+        //Clear radio button selection
         document.getElementById('clear-button').addEventListener('click', function () {
             ["rEC", "rFS", "rGA", "rKZ", "rLP", "rMP", "rNC", "rNW", "rWC", "rBlack", "rColoured", "rChinese", "rIndian", "rWhite", "r16", "r20", "r30", "r40", "r50", "rMale", "rFemale"].forEach(function (id) {
                 document.getElementById(id).checked = false;

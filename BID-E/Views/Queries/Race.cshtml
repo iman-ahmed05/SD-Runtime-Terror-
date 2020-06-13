@@ -11,6 +11,7 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
+        //Read data from ViewBag into array
         JSONRace = '@Html.Raw(Json.Serialize(ViewBag.Race))';
         console.log(JSONRace);
         var Race = [];
@@ -68,12 +69,8 @@
 
         console.log();
 
+        //Draw Google chart
         google.charts.setOnLoadCallback(drawRace);
-        google.charts.setOnLoadCallback(drawExcluded);
-        google.charts.setOnLoadCallback(drawProceed);
-        google.charts.setOnLoadCallback(drawQualified);
-        google.charts.setOnLoadCallback(drawNA);
-
         function drawRace() {
             var data = google.visualization.arrayToDataTable(Race);
             var options = {
@@ -83,12 +80,12 @@
                     height: "80%",
                     width: "80%"
                 }
-
             };
             var chart = new google.visualization.PieChart(document.getElementById('pieRace'));
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawExcluded);
         function drawExcluded() {
             var data = google.visualization.arrayToDataTable(Excluded);
             var options = {
@@ -101,11 +98,11 @@
                     width: "70%"
                 }
             };
-
             var chart = new google.visualization.PieChart(document.getElementById('piechartExcluded'));
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawProceed);
         function drawProceed() {
             var data = google.visualization.arrayToDataTable(Proceed);
             var options = {
@@ -122,6 +119,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawQualified);
         function drawQualified() {
             var data = google.visualization.arrayToDataTable(Proceed);
             var options = {
@@ -138,6 +136,7 @@
             chart.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawNA);
         function drawNA() {
             var data = google.visualization.arrayToDataTable(NA);
             var options = {
@@ -153,8 +152,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechartNA'));
             chart.draw(data, options);
         }
-
-
     </script>
 </head>
 <body>

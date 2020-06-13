@@ -11,6 +11,7 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
+        //Read data from ViewBag into array
         JSONExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
         console.log(JSONExcluded);
         var Excluded = [];
@@ -79,6 +80,7 @@
 
         console.log();
 
+        //Draw Google chart
         google.charts.setOnLoadCallback(drawExcluded);
         function drawExcluded() {
             var data = google.visualization.arrayToDataTable(Excluded);
@@ -94,6 +96,7 @@
             var materialChart = new google.visualization.LineChart(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
         }
+
         google.charts.setOnLoadCallback(drawQualified);
         function drawQualified() {
             var data = google.visualization.arrayToDataTable(Qualified);
@@ -109,6 +112,7 @@
             var materialChart = new google.visualization.LineChart(document.getElementById('barQualified'));
             materialChart.draw(data, materialOptions);
         }
+
         google.charts.setOnLoadCallback(drawProceed);
         function drawProceed() {
             var data = google.visualization.arrayToDataTable(Proceed);
@@ -124,6 +128,7 @@
             var materialChart = new google.visualization.LineChart(document.getElementById('barProceed'));
             materialChart.draw(data, materialOptions);
         }
+
         google.charts.setOnLoadCallback(drawNotCategorised);
         function drawNotCategorised() {
             var data = google.visualization.arrayToDataTable(NotCategorised);
@@ -152,7 +157,6 @@
                     height: "70%",
                     width: "70%"
                 }
-
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartMale'));
             chart.draw(data, options);
@@ -170,12 +174,10 @@
                     height: "70%",
                     width: "70%"
                 }
-
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
             chart.draw(data, options);
         }
-
     </script>
 </head>
 <body>
@@ -183,7 +185,6 @@
     <hr class="my-4" />
     <h5>Progression outcomes</h5>
     <br />
-
     <table class="columns">
         <tr>
             <td><div id="barExcluded" style="width: 550px; height: 500px;border: 1px solid #ccc"></div></td>

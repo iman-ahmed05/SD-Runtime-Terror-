@@ -23,13 +23,17 @@ namespace BID_E.Controllers
         // GET: /<controller>/
         public IActionResult Landing()
         {
+            //Verifies that user has successfully logged in before proceeding
             if (HttpContext.Session.GetString("UserId") != null)
             {
                 ViewBag.Username = HttpContext.Session.GetString("Username");
 
+                //Connection to Database
                 string cs = "Filename =./SD.db";
                 SqliteConnection conn = new SqliteConnection(cs);
                 SqliteCommand cmd;
+
+                //Create lists to store data from each query
                 List<LookupOutcome> group2008 = new List<LookupOutcome>();
                 List<LookupOutcome> group2009 = new List<LookupOutcome>();
                 List<LookupOutcome> group2010 = new List<LookupOutcome>();
@@ -42,7 +46,7 @@ namespace BID_E.Controllers
                 List<LookupOutcome> group2017 = new List<LookupOutcome>();
                 List<LookupOutcome> group2018 = new List<LookupOutcome>();
 
-
+                //SQL Query Strings
                 string Outcome2008 = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE REG_END = '2008' GROUP BY YOS3_OUT";
                 string Outcome2009 = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE REG_END = '2009' GROUP BY YOS3_OUT";
                 string Outcome2010 = "SELECT YOS3_OUT, COUNT(*)  FROM GENERAL WHERE REG_END = '2010' GROUP BY YOS3_OUT";
@@ -59,10 +63,12 @@ namespace BID_E.Controllers
                 conn.Open();
                 if ((conn.State & System.Data.ConnectionState.Open) > 0)
                 {
+                    //Execution of query
                     cmd = new SqliteCommand(Outcome2008, conn);
                     SqliteDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
+                        //Results from query added to List
                         LookupOutcome obj = new LookupOutcome();
                         obj.outcome = reader.GetValue(0).ToString();
                         obj.count = reader.GetInt32(1);
@@ -170,8 +176,9 @@ namespace BID_E.Controllers
                     }
 
                 }
-
                 conn.Close();
+
+                //Data from lists added to ViewBag to be passed to View
                 ViewBag.year08 = group2008;
                 ViewBag.year09 = group2009;
                 ViewBag.year10 = group2010;
@@ -187,10 +194,9 @@ namespace BID_E.Controllers
             }
             else
             {
+                //If user not successfully logged in
                 return RedirectToAction("Login");
             }
-
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

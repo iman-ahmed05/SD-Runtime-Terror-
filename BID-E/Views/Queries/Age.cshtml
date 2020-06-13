@@ -1,8 +1,8 @@
-
 @{
     ViewData["Title"] = "Age";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -11,6 +11,7 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
+        //Read data from ViewBag into array
         JSONAge = '@Html.Raw(Json.Serialize(ViewBag.Age))';
         console.log(JSONAge);
         var Age = [];
@@ -44,16 +45,14 @@
             Female.push(arrFemale);
         });
 
+        //Draw Google chart
         google.charts.setOnLoadCallback(drawBar);
-
         function drawBar() {
             var data = google.visualization.arrayToDataTable(Age);
-
             var materialOptions = {
                 bars: 'horizontal',
                 legend: { position: 'none' },
                 colors: ['#DD4477'],
-
             };
             var materialChart = new google.charts.Bar(document.getElementById('Bar'));
             materialChart.draw(data, materialOptions);
@@ -80,9 +79,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechartFemale'));
             chart.draw(data, options);
         }
-
-
-
     </script>
 </head>
 <body>

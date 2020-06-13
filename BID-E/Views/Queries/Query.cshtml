@@ -7,7 +7,7 @@
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.load('current', { 'packages': ['bar'] });
 
-
+        //Read data from ViewBag into array
         JSONExcluded = '@Html.Raw(Json.Serialize(ViewBag.Excluded))';
         console.log(JSONExcluded);
         var Excluded = [];
@@ -54,6 +54,7 @@
 
         console.log();
 
+        //Draw Google chart
         google.charts.setOnLoadCallback(drawExcluded);
         function drawExcluded() {
             var data = google.visualization.arrayToDataTable(Excluded);
@@ -64,6 +65,7 @@
             var materialChart = new google.charts.Bar(document.getElementById('barExcluded'));
             materialChart.draw(data, materialOptions);
         }
+
         google.charts.setOnLoadCallback(drawQualified);
         function drawQualified() {
             var data = google.visualization.arrayToDataTable(Qualified);
@@ -74,6 +76,7 @@
             var materialChart = new google.charts.Bar(document.getElementById('barQualified'));
             materialChart.draw(data, materialOptions);
         }
+
         google.charts.setOnLoadCallback(drawProceed);
         function drawProceed() {
             var data = google.visualization.arrayToDataTable(Proceed);
@@ -85,16 +88,16 @@
             materialChart.draw(data, materialOptions);
         }
 
-            google.charts.setOnLoadCallback(drawNotCategorised);
-            function drawNotCategorised() {
-                var data = google.visualization.arrayToDataTable(NotCategorised);
-                var materialOptions = {
-                    legend: { position: 'none' },
-                    colors: ['#FF9900'],
-                };
-                var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
-                materialChart.draw(data, materialOptions);
-            }
+        google.charts.setOnLoadCallback(drawNotCategorised);
+        function drawNotCategorised() {
+            var data = google.visualization.arrayToDataTable(NotCategorised);
+            var materialOptions = {
+                legend: { position: 'none' },
+                colors: ['#FF9900'],
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('barNotCategorised'));
+            materialChart.draw(data, materialOptions);
+        }
     </script>
 </head>
 <body>
@@ -165,8 +168,8 @@
             <tr>
                 <td>
                     <h5 style="color:white;">.</h5>
-
-                    <div class="alert alert-dismissible alert-danger" style="width: 1100px; text-align: center; padding: 125px 0; height: 300px;border: 1px solid #DC3912"><p class="lead" style="color:#DC3912;">
+                    <div class="alert alert-dismissible alert-danger" style="width: 1100px; text-align: center; padding: 125px 0; height: 300px;border: 1px solid #DC3912">
+                        <p class="lead" style="color:#DC3912;">
                         NO DATA FOR SELECTED FILTER ATTRIBUTES
                         <br />
                         <a href="@Url.Action("Landing", "Queries")" class="alert-link">Try a new selection</a></p>
