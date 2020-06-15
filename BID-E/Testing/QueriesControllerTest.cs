@@ -45,7 +45,7 @@ namespace BID_Etests
     //        var viewResult = query.Landing();
 
     //        Assert.NotNull(viewResult);
-    //    }
+    //   }
     //    [Fact]
     //    public void QueriesControllerTests_Gen()
     //    {

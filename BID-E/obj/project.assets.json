@@ -7911,11 +7911,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\BID-E.csproj",
+      "projectUniqueName": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\BID-E\\BID-E.csproj",
       "projectName": "BID-E",
-      "projectPath": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\BID-E.csproj",
+      "projectPath": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\BID-E\\BID-E.csproj",
       "packagesPath": "C:\\Users\\craig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\obj\\",
+      "outputPath": "C:\\Users\\craig\\Desktop\\Computer Science\\COMS3009A Software Design 2020\\SD Project\\SD-Runtime-Terror-\\BID-E\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
